@@ -4,43 +4,27 @@ import { Button, Card } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 
-const Portfolio = () => {
+interface PortfolioProps {
+	name: string;
+	description: string;
+	biography: string;
+	projects: { title: string; description: string; link: string }[];
+	contact: { email: string; phone: string; linkedin: string };
+}
+
+const Portfolio: React.FC<PortfolioProps> = ({
+	name,
+	description,
+	biography,
+	projects,
+	contact,
+}) => {
 	// VARIABLES DE THÈME (modifiable)
 	const theme = {
 		primaryColor: "#4F46E5", // Couleur principale (Indigo-600)
 		secondaryColor: "#10B981", // Couleur secondaire (Emerald-500)
 		backgroundColor: "#F3F4F6", // Fond de page (Gray-100)
 		textColor: "#1F2937", // Couleur de texte (Gray-800)
-	};
-
-	// VARIABLES DE CONTENU (modifiable)
-	const name = "John Doe";
-	const description = "Développeur Fullstack / UX-UI Designer / Créatif";
-	const biography =
-		"Passionné par la technologie et le design, je mets en œuvre mon savoir-faire pour réaliser des projets innovants et esthétiques. Découvrez ici quelques-unes de mes réalisations.";
-	const projects = [
-		{
-			title: "Projet Alpha",
-			description: "Une application web moderne avec React et Node.js.",
-			link: "https://github.com/johndoe/projet-alpha",
-		},
-		{
-			title: "Projet Beta",
-			description:
-				"Une interface utilisateur intuitive conçue avec Figma et Tailwind.",
-			link: "https://github.com/johndoe/projet-beta",
-		},
-		{
-			title: "Projet Gamma",
-			description:
-				"Un projet innovant qui intègre l'IA pour améliorer l'expérience utilisateur.",
-			link: "https://github.com/johndoe/projet-gamma",
-		},
-	];
-	const contact = {
-		email: "contact@johndoe.com",
-		phone: "+33 1 23 45 67 89",
-		linkedin: "https://www.linkedin.com/in/johndoe",
 	};
 
 	return (
