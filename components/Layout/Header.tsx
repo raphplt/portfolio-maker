@@ -3,6 +3,11 @@ import { Link } from "@heroui/react";
 import React from "react";
 
 const Header = () => {
+	const currentPath = window.location.pathname;
+	if (currentPath.startsWith("/portfolios/new")) {
+		return null;
+	}
+	
 	return (
 		<div className="flex items-center justify-between py-4 px-12 fixed top-0 left-0 w-full bg-background shadow-md">
 			<Link className="font-bold text-lg text-black" href="/">
