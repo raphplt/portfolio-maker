@@ -30,9 +30,7 @@ const PortfolioEditor = () => {
 	const [templateData, setTemplateData] =
 		useState<TemplateData>(templateDefaultData);
 
-	// État pour le zoom (1 = 100%)
 	const [zoom, setZoom] = useState(1);
-	// Référence sur la zone éditable (template)
 	const editorRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -52,10 +50,8 @@ const PortfolioEditor = () => {
 		}
 	}, [id]);
 
-	// Gestion globale du zoom via CTRL + molette sur la zone de l'éditeur
 	useEffect(() => {
 		const handleWheelGlobal = (e: WheelEvent) => {
-			// Si CTRL est enfoncé ET que l'événement concerne notre zone éditable
 			if (
 				e.ctrlKey &&
 				editorRef.current &&
@@ -70,14 +66,12 @@ const PortfolioEditor = () => {
 			}
 		};
 
-		// Pour que preventDefault fonctionne, l'écouteur doit être ajouté avec { passive: false }
 		window.addEventListener("wheel", handleWheelGlobal, { passive: false });
 		return () => {
 			window.removeEventListener("wheel", handleWheelGlobal);
 		};
 	}, []);
 
-	// Autres gestionnaires
 	const handleEditToggle = () => {
 		setIsEditing(!isEditing);
 	};
@@ -94,13 +88,11 @@ const PortfolioEditor = () => {
 		setIsEditing(false);
 	};
 
-	// Contrôle du zoom par boutons (optionnel)
 	const decreaseZoom = () => setZoom((prev) => Math.max(prev - 0.1, 0.5));
 	const increaseZoom = () => setZoom((prev) => Math.min(prev + 0.1, 2));
 
 	return (
 		<>
-			{/* Header global fixe */}
 			<header className="fixed top-0 left-0 right-0 bg-gray-50 shadow z-50 w-11/12 mx-auto rounded-lg">
 				<div className="container mx-auto px-2 py-3 flex justify-between items-center">
 					<div className="flex items-center space-x-6">
@@ -119,7 +111,6 @@ const PortfolioEditor = () => {
 						<Button color="secondary" size="sm">
 							Action 2
 						</Button>
-						{/* Contrôles de zoom par boutons */}
 						<div className="flex items-center space-x-2">
 							<Button onPress={decreaseZoom} size="sm" color="warning">
 								-
@@ -133,11 +124,8 @@ const PortfolioEditor = () => {
 				</div>
 			</header>
 
-			{/* Zone principale avec padding en haut et sans barre de défilement verticale */}
 			<div className="pt-20 flex flex-col md:flex-row bg-gray-700 min-h-screen overflow-hidden">
-				{/* Zone zoomable (uniquement le template) */}
 				<div className="flex-1 p-6 md:mr-64">
-					{/* La zone éditable reçoit la ref et le zoom est appliqué via CSS */}
 					<div
 						ref={editorRef}
 						style={{ transform: `scale(${zoom})`, transformOrigin: "top center" }}
@@ -150,7 +138,6 @@ const PortfolioEditor = () => {
 					</div>
 				</div>
 
-				{/* Menu d'édition fixe (sidebar) */}
 				<aside className="w-full md:w-64 bg-gray-100 p-4 border-l fixed right-0 top-20 h-full overflow-auto rounded-lg">
 					<h2 className="text-lg font-semibold mb-4">Édition du Portfolio</h2>
 					<Button onPress={handleEditToggle} color="warning">
