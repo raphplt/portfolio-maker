@@ -2,6 +2,7 @@
 import { Button } from "@heroui/react";
 import React from "react";
 import { Icon } from "@iconify/react";
+import Link from "next/link";
 
 const Home = () => {
 	return (
@@ -15,6 +16,8 @@ const Home = () => {
 				color="primary"
 				size="lg"
 				endContent={<Icon icon="akar-icons:arrow-right" />}
+				as={Link}
+				href="/portfolios/new"
 			>
 				Commencer
 			</Button>
