@@ -28,7 +28,8 @@ type SideBarProps = {
 	decreaseZoom: () => void;
 	zoom: number;
 	setZoom: React.Dispatch<React.SetStateAction<number>>;
-	menuSelected: "infos" | "colors"; // ajout de la prop
+	menuSelected: "infos" | "colors";
+	exportTemplate: () => void;
 };
 
 const SideBar = ({
@@ -40,7 +41,8 @@ const SideBar = ({
 	decreaseZoom,
 	zoom,
 	setZoom,
-	menuSelected, // réception de la prop
+	menuSelected,
+	exportTemplate,
 }: SideBarProps) => {
 	const goFullScreen = () => {
 		setZoom(1);
@@ -67,11 +69,19 @@ const SideBar = ({
 					>
 						Plein écran
 					</Button>
-					<Button color="secondary" size="sm">
+					<Button
+						color="secondary"
+						size="sm"
+						onPress={exportTemplate}
+						startContent={<Icon icon="mdi:export" width={18} />}
+					>
 						Exporter
 					</Button>
 				</div>
 				<div className="flex items-center space-x-2 bg-gray-100 p-1 rounded-xl">
+					<Button onPress={() => setZoom(1)} size="sm" color="warning" isIconOnly>
+						<Icon icon="mdi:restart" width={16} />
+					</Button>
 					<Button onPress={decreaseZoom} size="sm" color="warning" isIconOnly>
 						<Icon icon="bx:bx-minus" width={16} />
 					</Button>

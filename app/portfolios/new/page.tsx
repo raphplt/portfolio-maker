@@ -1,6 +1,7 @@
 "use client";
-import { Button, Card, CardBody } from "@heroui/react";
+import { Button, Card, CardBody, CardHeader } from "@heroui/react";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
@@ -30,10 +31,19 @@ const New = () => {
 						as={Link}
 						isHoverable
 						href={`/portfolios/new/${template}`}
-						className="w-96 h-48 rounded-lg p-2 border flex items-center justify-center"
+						className="w-96 rounded-lg p-2 border flex items-center justify-center"
 					>
-						<CardBody>
+						<CardHeader>
 							<span className="font-semibold">{template}</span>
+						</CardHeader>
+						<CardBody>
+							<Image
+								src={`/templates/${template}.png`}
+								width={200}
+								height={200}
+								alt={template}
+								className="rounded-lg w-full h-48 object-cover"
+							/>
 						</CardBody>
 					</Card>
 				))}

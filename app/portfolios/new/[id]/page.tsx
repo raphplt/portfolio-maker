@@ -12,6 +12,7 @@ import {
 import TopBar from "@/components/Editor/TopBar";
 import SideBar from "@/components/Editor/SideBar";
 import { Button } from "@heroui/react";
+import exportToHTML from "@/utils/export";
 
 const PortfolioEditor = () => {
 	const { data: session } = useSession();
@@ -147,6 +148,13 @@ const PortfolioEditor = () => {
 		setZoom(1);
 		setFullScreen((prev) => !prev);
 	};
+
+	const handleExport = () => {
+		if (Component) {
+			exportToHTML(Component, templateData);
+		}
+	};
+
 	return (
 		<>
 			<TopBar menuSelected={menuSelected} setMenuSelected={setMenuSelected} />
@@ -191,7 +199,6 @@ const PortfolioEditor = () => {
 				</div>
 			</div>
 
-			{/* Passage de menuSelected à SideBar */}
 			<SideBar
 				isEditing={isEditing}
 				handleEditToggle={handleEditToggle}
@@ -203,7 +210,8 @@ const PortfolioEditor = () => {
 				decreaseZoom={decreaseZoom}
 				zoom={zoom}
 				setZoom={setZoom}
-				menuSelected={menuSelected} // <-- nouvelle prop
+				menuSelected={menuSelected}
+				exportTemplate={handleExport}
 			/>
 		</>
 	);

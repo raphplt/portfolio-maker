@@ -102,6 +102,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 					>
 						Découvrir mes projets
 					</Button>
+
 				</section>
 
 				{/* SECTION PROJETS */}
