@@ -2,25 +2,16 @@
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-import { templateDefaultData } from "./helper";
+import {
+	ComponentProps,
+	MenusType,
+	Repository,
+	TemplateData,
+	templateDefaultData,
+} from "./helper";
 import TopBar from "@/components/Editor/TopBar";
 import SideBar from "@/components/Editor/SideBar";
-
-export interface TemplateData {
-	name: string;
-	description: string;
-	biography: string;
-	projects: { title: string; description: string; link: string }[];
-	contact: { email: string; phone: string; linkedin: string };
-}
-
-export interface ComponentProps {
-	name: string;
-	description: string;
-	biography: string;
-	projects: { title: string; description: string; link: string }[];
-	contact: { email: string; phone: string; linkedin: string };
-}
+import { Button } from "@heroui/react";
 
 const PortfolioEditor = () => {
 	const { data: session } = useSession();
@@ -30,9 +21,11 @@ const PortfolioEditor = () => {
 	const [isEditing, setIsEditing] = useState(false);
 	const [templateData, setTemplateData] =
 		useState<TemplateData>(templateDefaultData);
-	const [zoom, setZoom] = useState(1);
 	const [hasFetchedProjects, setHasFetchedProjects] = useState(false);
 	const editorRef = useRef<HTMLDivElement>(null);
+	const [zoom, setZoom] = useState(1);
+	const [fullScreen, setFullScreen] = useState(false);
+	const [menuSelected, setMenuSelected] = useState<MenusType>("infos");
 
 	useEffect(() => {
 		const loadComponent = async () => {
@@ -51,7 +44,6 @@ const PortfolioEditor = () => {
 		}
 	}, [id]);
 
-	// Gestion du zoom via ctrl+molette sur l'éditeur
 	useEffect(() => {
 		const handleWheelGlobal = (e: WheelEvent) => {
 			if (
@@ -74,8 +66,6 @@ const PortfolioEditor = () => {
 		};
 	}, []);
 
-	console.log("session", session);
-	// Récupérer les projets GitHub (une seule fois)
 	const fetchGithubProjects = async (accessToken: string) => {
 		try {
 			const res = await fetch("https://api.github.com/user/repos", {
@@ -87,17 +77,19 @@ const PortfolioEditor = () => {
 				throw new Error("Erreur lors de la récupération des repos");
 			}
 			const repos = await res.json();
-			console.log("repos", repos);
 			const projects = repos
 				.filter(
-					(repo) =>
+					(repo: Repository) =>
 						!repo.fork &&
 						!repo.archived &&
 						!repo.private &&
 						repo.owner.login === session?.user?.login
 				)
-				// .slice(0, 3)
-
+				.sort(
+					(a: Repository, b: Repository) =>
+						new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+				)
+				.slice(0, 6)
 				.map((repo: { name: string; description: string; html_url: string }) => ({
 					title: repo.name,
 					description: repo.description || "Aucune description",
@@ -123,13 +115,26 @@ const PortfolioEditor = () => {
 		setIsEditing(!isEditing);
 	};
 
-	const handleChange = (field: keyof TemplateData, value: string) => {
-		setTemplateData((prev) => ({
-			...prev,
-			[field]: value,
-		}));
+	const handleChange = (
+		field: keyof TemplateData | keyof TemplateData["theme"],
+		value: string
+	) => {
+		setTemplateData((prev) => {
+			if (field in prev.theme) {
+				return {
+					...prev,
+					theme: {
+						...prev.theme,
+						[field as keyof TemplateData["theme"]]: value,
+					},
+				};
+			}
+			return {
+				...prev,
+				[field as keyof TemplateData]: value,
+			};
+		});
 	};
-
 	const handleSave = () => {
 		console.log("Données sauvegardées :", templateData);
 		setIsEditing(false);
@@ -138,35 +143,67 @@ const PortfolioEditor = () => {
 	const decreaseZoom = () => setZoom((prev) => Math.max(prev - 0.1, 0.5));
 	const increaseZoom = () => setZoom((prev) => Math.min(prev + 0.1, 2));
 
+	const exitFulLScreen = () => {
+		setZoom(1);
+		setFullScreen((prev) => !prev);
+	};
 	return (
 		<>
-			<TopBar
-				zoom={zoom}
-				increaseZoom={increaseZoom}
-				decreaseZoom={decreaseZoom}
-			/>
-			<div className="pt-20 flex flex-col md:flex-row bg-gray-900 min-h-screen overflow-hidden">
+			<TopBar menuSelected={menuSelected} setMenuSelected={setMenuSelected} />
+			<div className="pt-20 flex flex-col md:flex-row bg-slate-900 min-h-screen overflow-hidden">
 				<div className="flex-1 p-6 md:mr-64">
 					<div
 						ref={editorRef}
-						style={{ transform: `scale(${zoom})`, transformOrigin: "top center" }}
+						style={{
+							transform: `scale(${zoom})`,
+							transformOrigin: "top center",
+							...(fullScreen && {
+								position: "fixed",
+								top: 0,
+								left: 0,
+								width: "100vw",
+								height: "100vh",
+								zIndex: 9999,
+								background: "#000",
+								overflow: "auto",
+							}),
+						}}
 					>
 						{Component ? (
-							<Component {...templateData} />
+							<>
+								<Button
+									color="primary"
+									size="sm"
+									className="mb-4 absolute bottom-4 right-4 z-20"
+									style={{
+										display: fullScreen ? "block" : "none",
+									}}
+									onPress={exitFulLScreen}
+								>
+									{fullScreen ? "Quitter le plein écran" : "Plein écran"}
+								</Button>
+								<Component {...templateData} />
+							</>
 						) : (
 							<p className="text-white">Loading portfolio...</p>
 						)}
 					</div>
 				</div>
 			</div>
-			{/* Si l'utilisateur n'est pas connecté, on affiche un bouton pour se connecter */}
 
+			{/* Passage de menuSelected à SideBar */}
 			<SideBar
 				isEditing={isEditing}
 				handleEditToggle={handleEditToggle}
 				templateData={templateData}
 				handleChange={handleChange}
 				handleSave={handleSave}
+				setFullScreen={() => setFullScreen((prev) => !prev)}
+				increaseZoom={increaseZoom}
+				decreaseZoom={decreaseZoom}
+				zoom={zoom}
+				setZoom={setZoom}
+				menuSelected={menuSelected} // <-- nouvelle prop
 			/>
 		</>
 	);

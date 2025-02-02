@@ -39,6 +39,52 @@ export const templateDefaultData = {
 			author: "Alice Johnson, Directrice de ABC Ltd",
 		},
 	],
-
 	skills: ["React", "Node.js", "Figma", "Tailwind", "IA"],
+	theme: {
+		primaryColor: "#4F46E5",
+		secondaryColor: "#10B981",
+		backgroundColor: "#F3F4F6",
+		textColor: "#1F2937",
+	},
 };
+
+export interface TemplateData {
+	name: string;
+	description: string;
+	biography: string;
+	projects: { title: string; description: string; link: string }[];
+	contact: { email: string; phone: string; linkedin: string };
+	theme: {
+		primaryColor: string;
+		secondaryColor: string;
+		backgroundColor: string;
+		textColor: string;
+	};
+}
+
+export interface ComponentProps {
+	name: string;
+	description: string;
+	biography: string;
+	projects: { title: string; description: string; link: string }[];
+	contact: { email: string; phone: string; linkedin: string };
+	theme: {
+		primaryColor: string;
+		secondaryColor: string;
+		backgroundColor: string;
+		textColor: string;
+	};
+}
+
+export interface Repository {
+	title: string;
+	description: string;
+	link: string;
+	fork: boolean;
+	archived: boolean;
+	private: boolean;
+	owner: { login: string };
+	updated_at: string;
+}
+
+export type MenusType = "infos" | "colors";
