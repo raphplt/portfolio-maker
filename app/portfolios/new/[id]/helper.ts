@@ -27,4 +27,18 @@ export const templateDefaultData = {
 		phone: "+33 1 23 45 67 89",
 		linkedin: "https://www.linkedin.com/in/johndoe",
 	},
+	testimonials: [
+		{
+			message:
+				"John est un développeur talentueux et créatif. Il a su répondre à nos attentes et livrer un projet de qualité.",
+			author: "Jane Smith, CEO de XYZ Corp",
+		},
+		{
+			message:
+				"Travailler avec John a été une expérience enrichissante. Son expertise et sa réactivité ont été très appréciées.",
+			author: "Alice Johnson, Directrice de ABC Ltd",
+		},
+	],
+
+	skills: ["React", "Node.js", "Figma", "Tailwind", "IA"],
 };
