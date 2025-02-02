@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Layout/Header";
+import NextAuthProvider from "@/components/Sessions/NextAuthProvider";
 
 export const metadata: Metadata = {
 	title: "Portfolio Maker",
@@ -13,11 +14,13 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="fr">
-			<body className={`antialiased`}>
-				<Header />
-				{children}
-			</body>
-		</html>
+		<NextAuthProvider>
+			<html lang="fr">
+				<body className={`antialiased`}>
+					<Header />
+					{children}
+				</body>
+			</html>
+		</NextAuthProvider>
 	);
 }

@@ -1,7 +1,10 @@
+"use client";
 import { Button } from "@heroui/react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
+import SessionPopover from "../Shared/SessionPopover";
 
 type TopBarProps = {
 	zoom: number;
@@ -11,9 +14,13 @@ type TopBarProps = {
 
 const TopBar = ({ zoom, increaseZoom, decreaseZoom }: TopBarProps) => {
 	return (
-		<header className="fixed top-0 left-0 right-0 bg-gray-50 shadow z-50 w-11/12 mx-auto rounded-lg">
+		<header className="fixed top-0 left-0 right-0 bg-gray-50 shadow z-50 w-full mx-auto rounded-lg">
 			<div className="container mx-auto px-2 py-3 flex justify-between items-center">
 				<div className="flex items-center space-x-6">
+					<Link href="/">
+						<Image src={"/Logo.png"} alt="Logo" width={32} height={32} />
+					</Link>
+
 					<Link className="font-bold text-lg text-black" href="/">
 						Portfolio Maker
 					</Link>
@@ -43,6 +50,7 @@ const TopBar = ({ zoom, increaseZoom, decreaseZoom }: TopBarProps) => {
 							<Icon icon="bx:bx-plus" width={16} />
 						</Button>
 					</div>
+					<SessionPopover />
 				</div>
 			</div>
 		</header>
