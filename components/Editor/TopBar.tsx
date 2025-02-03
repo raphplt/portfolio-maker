@@ -16,16 +16,16 @@ const TopBar = ({ menuSelected, setMenuSelected }: TopBarProps) => {
 	return (
 		<header className="fixed top-0 left-0 right-0 bg-gray-100 shadow z-50 w-full mx-auto rounded-b-lg">
 			<div className=" px-10 py-3 flex justify-between items-center">
-				<div className="flex items-center space-x-3">
-					<Link href="/">
+				<div className="flex items-center space-x-4">
+					<Button size="sm" isIconOnly>
+						<Icon icon="mdi:menu" width={20} />
+					</Button>
+					<Link href="/" className="flex items-center space-x-4 cursor-pointer">
 						<Image src={"/Logo.png"} alt="Logo" width={32} height={32} />
-					</Link>
-
-					<Link className="font-bold text-black" href="/">
-						Portfolio Maker
+						<span className="font-bold text-black">Portfolio Maker</span>
 					</Link>
 				</div>
-				<div className="flex items-center space-x-3">
+				<div className="flex items-center space-x-5">
 					<Button
 						size="sm"
 						startContent={<Icon icon="eva:info-outline" />}
