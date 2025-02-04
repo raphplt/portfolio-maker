@@ -29,6 +29,10 @@ export interface TemplateData {
 	};
 }
 
+export type TemplateDataKey =
+	| keyof TemplateData
+	| `theme.${keyof TemplateData["theme"]}`;
+
 export const templateDefaultData: TemplateData = {
 	name: "Mon Portfolio",
 	description: "Bienvenue sur mon portfolio personnel.",
