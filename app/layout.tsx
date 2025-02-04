@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Layout/Header";
 import NextAuthProvider from "@/components/Sessions/NextAuthProvider";
+import Footer from "@/components/Layout/Footer";
 
 export const metadata: Metadata = {
 	title: "Portfolio Maker",
@@ -19,6 +20,7 @@ export default function RootLayout({
 				<body className={`antialiased`}>
 					<Header />
 					{children}
+					<Footer />
 				</body>
 			</html>
 		</NextAuthProvider>

@@ -13,7 +13,7 @@ const Header = () => {
 	}
 
 	return (
-		<div className="flex items-center justify-between py-4 px-12 fixed top-0 left-0 w-full bg-background shadow-md">
+		<div className="flex items-center justify-between py-4 px-12 fixed top-0 left-0 w-full bg-white/30 shadow-md z-50">
 			<Link
 				className="font-bold text-lg text-black flex flex-row gap-x-4"
 				href="/"
