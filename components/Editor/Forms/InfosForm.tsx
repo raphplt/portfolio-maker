@@ -58,7 +58,6 @@ const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
 			</AccordionItem>
 			<AccordionItem title="Sections" key={2}>
 				<div className="flex flex-col space-y-2 w-full">
-					={" "}
 					<Input
 						id="ctaButtonText"
 						label="Texte du bouton CTA"
