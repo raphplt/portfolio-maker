@@ -11,7 +11,7 @@ import {
 } from "./helper";
 import TopBar from "@/components/Editor/TopBar";
 import SideBar from "@/components/Editor/SideBar";
-import { Button } from "@heroui/react";
+import { Button, Spinner } from "@heroui/react";
 import exportToHTML from "@/utils/export";
 
 const PortfolioEditor = () => {
@@ -208,7 +208,12 @@ const PortfolioEditor = () => {
 								<Component {...templateData} />
 							</>
 						) : (
-							<p className="text-white">Loading portfolio...</p>
+							<div className="flex items-center justify-center h-full">
+								<h1 className="text-white text-2xl font-bold">
+									Chargement du template...
+								</h1>
+								<Spinner size="lg" className="ml-4" />
+							</div>
 						)}
 					</div>
 				</div>

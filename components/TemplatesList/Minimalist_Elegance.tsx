@@ -39,33 +39,49 @@ const Portfolio: React.FC<PortfolioProps> = ({
 	const { primaryColor, secondaryColor, backgroundColor, textColor } = theme;
 
 	return (
-		<div className="font-sans">
-			{/* Header Sticky */}
-			<header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+		<div className="font-sans" style={{ backgroundColor }}>
+			{/* Header – Navigation avec effet de flou en fond */}
+			<header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/70 shadow-md">
 				<div className="container mx-auto px-6 py-4 flex justify-between items-center">
-					<h1 className="text-2xl font-bold" style={{ color: primaryColor }}>
+					<h1 className="text-3xl font-bold" style={{ color: primaryColor }}>
 						{name}
 					</h1>
 					<nav>
 						<ul className="flex space-x-8">
 							<li>
-								<a href="#hero" className="hover:text-gray-700 transition-colors">
+								<a
+									href="#hero"
+									className="hover:text-gray-800 transition-colors"
+									style={{ color: textColor }}
+								>
 									Accueil
 								</a>
 							</li>
 							<li>
-								<a href="#projects" className="hover:text-gray-700 transition-colors">
-									Projets
+								<a
+									href="#projects"
+									className="hover:text-gray-800 transition-colors"
+									style={{ color: textColor }}
+								>
+									{projectsTitle}
 								</a>
 							</li>
 							<li>
-								<a href="#about" className="hover:text-gray-700 transition-colors">
-									À propos
+								<a
+									href="#about"
+									className="hover:text-gray-800 transition-colors"
+									style={{ color: textColor }}
+								>
+									{aboutTitle}
 								</a>
 							</li>
 							<li>
-								<a href="#contact" className="hover:text-gray-700 transition-colors">
-									Contact
+								<a
+									href="#contact"
+									className="hover:text-gray-800 transition-colors"
+									style={{ color: textColor }}
+								>
+									{contactTitle}
 								</a>
 							</li>
 						</ul>
@@ -73,22 +89,22 @@ const Portfolio: React.FC<PortfolioProps> = ({
 				</div>
 			</header>
 
-			{/* Section Hero */}
+			{/* Section Hero – Fond en dégradé et typographie impactante */}
 			<section
 				id="hero"
-				className="relative flex items-center justify-center min-h-screen pt-20 pb-10 text-center"
+				className="relative flex items-center justify-center min-h-screen pt-24 pb-12 text-center"
 				style={{
-					background: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), ${backgroundColor}`,
+					background: `linear-gradient(135deg, ${primaryColor}B3, ${secondaryColor}B3), ${backgroundColor}`,
 				}}
 			>
 				<div className="container mx-auto px-6">
 					<h2
-						className="text-5xl md:text-6xl font-bold mb-6"
+						className="text-6xl md:text-7xl font-extrabold mb-6"
 						style={{ color: primaryColor }}
 					>
 						{welcomeTitle}
 					</h2>
-					<p className="text-xl md:text-2xl mb-8" style={{ color: textColor }}>
+					<p className="text-2xl md:text-3xl mb-8" style={{ color: textColor }}>
 						{description}
 					</p>
 					<Button
@@ -96,7 +112,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 						size="lg"
 						as={Link}
 						href="#projects"
-						className="px-8 py-4 text-lg font-semibold"
+						className="px-8 py-4 text-xl font-semibold rounded-full shadow-lg hover:shadow-2xl transition-all"
 						style={{ backgroundColor: primaryColor, borderColor: primaryColor }}
 					>
 						{ctaButtonText}
@@ -107,11 +123,11 @@ const Portfolio: React.FC<PortfolioProps> = ({
 				</div>
 			</section>
 
-			{/* Section Projets */}
+			{/* Section Projets – Cartes avec animation et ombre accentuée */}
 			<section id="projects" className="py-20 bg-gray-50">
 				<div className="container mx-auto px-6">
 					<h2
-						className="text-4xl font-bold text-center mb-12"
+						className="text-5xl font-bold text-center mb-12"
 						style={{ color: primaryColor }}
 					>
 						{projectsTitle}
@@ -121,16 +137,16 @@ const Portfolio: React.FC<PortfolioProps> = ({
 							{projects.map((project, index) => (
 								<Card
 									key={index}
-									className="p-6 rounded-lg hover:shadow-xl transition-shadow bg-white"
-									style={{ borderColor: secondaryColor, borderWidth: "1px" }}
+									className="p-8 rounded-xl bg-white shadow-lg hover:shadow-2xl transition-transform transform hover:scale-105"
+									style={{ border: `1px solid ${secondaryColor}` }}
 								>
 									<h3
-										className="text-2xl font-semibold mb-4"
+										className="text-3xl font-semibold mb-4"
 										style={{ color: primaryColor }}
 									>
 										{project.title}
 									</h3>
-									<p className="mb-6" style={{ color: textColor }}>
+									<p className="mb-6 text-lg" style={{ color: textColor }}>
 										{project.description}
 									</p>
 									<Button
@@ -139,6 +155,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 										target="_blank"
 										color="secondary"
 										size="sm"
+										className="rounded-full"
 										style={{
 											backgroundColor: secondaryColor,
 											borderColor: secondaryColor,
@@ -157,34 +174,34 @@ const Portfolio: React.FC<PortfolioProps> = ({
 				</div>
 			</section>
 
-			{/* Section À propos */}
+			{/* Section À propos – Présentation textuelle aérée */}
 			<section id="about" className="py-20">
 				<div className="container mx-auto px-6">
 					<h2
-						className="text-4xl font-bold text-center mb-12"
+						className="text-5xl font-bold text-center mb-12"
 						style={{ color: primaryColor }}
 					>
 						{aboutTitle}
 					</h2>
 					<div className="max-w-3xl mx-auto text-center">
-						<p className="text-lg leading-relaxed" style={{ color: "white" }}>
+						<p className="text-xl leading-relaxed" style={{ color: textColor }}>
 							{biography}
 						</p>
 					</div>
 				</div>
 			</section>
 
-			{/* Section Contact */}
+			{/* Section Contact – Coordonnées claires et icônes harmonisées */}
 			<section id="contact" className="py-20 bg-gray-50">
 				<div className="container mx-auto px-6">
 					<h2
-						className="text-4xl font-bold text-center mb-12"
+						className="text-5xl font-bold text-center mb-12"
 						style={{ color: primaryColor }}
 					>
 						{contactTitle}
 					</h2>
 					<div className="max-w-xl mx-auto">
-						<div className="bg-white p-8 rounded-lg shadow-md">
+						<div className="bg-white p-8 rounded-xl shadow-lg">
 							<div className="space-y-6">
 								<div className="flex items-center">
 									<Icon
@@ -236,7 +253,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 				</div>
 			</section>
 
-			{/* Footer */}
+			{/* Footer – Simple et élégant */}
 			<footer
 				className="bg-white py-6 shadow-inner"
 				style={{ borderTop: `2px solid ${primaryColor}` }}

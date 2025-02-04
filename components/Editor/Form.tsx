@@ -43,7 +43,7 @@ const Form = ({
 				<Button
 					onPress={handleSave}
 					color="secondary"
-					className="w-full"
+					className="w-full text-white"
 					endContent={<Icon icon="mdi:content-save" width={20} color="white" />}
 				>
 					Enregistrer
