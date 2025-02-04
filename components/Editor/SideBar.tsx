@@ -1,26 +1,12 @@
-// SideBar.tsx
 import { TemplateData } from "@/app/portfolios/new/[id]/helper";
-import { Button } from "@heroui/react";
-import { Icon } from "@iconify/react/dist/iconify.js";
 import React from "react";
 import Form from "./Form";
+import BottomSideBar from "./BottomSideBar";
 
 type SideBarProps = {
 	isEditing: boolean;
 	handleEditToggle: () => void;
-	templateData: {
-		name: string;
-		description: string;
-		biography: string;
-		projects: { title: string; description: string; link: string }[];
-		contact: { email: string; phone: string; linkedin: string };
-		theme: {
-			primaryColor: string;
-			secondaryColor: string;
-			backgroundColor: string;
-			textColor: string;
-		};
-	};
+	templateData: TemplateData;
 	handleChange: (field: keyof TemplateData, value: string) => void;
 	handleSave: () => void;
 	setFullScreen: () => void;
@@ -50,47 +36,21 @@ const SideBar = ({
 	};
 
 	return (
-		<aside className="w-full md:w-64 bg-gray-100 p-4 border-l fixed right-0 top-20 h-[88%] overflow-auto rounded-lg flex flex-col justify-between">
-			{/* Passage de menuSelected au formulaire */}
+		<aside className="w-full md:w-64 bg-gray-100 p-4 border-l fixed right-0 top-20 h-[90%] overflow-auto rounded-lg flex flex-col justify-between">
 			<Form
 				templateData={templateData}
 				handleChange={handleChange}
 				handleSave={handleSave}
 				menuSelected={menuSelected}
 			/>
-
-			<div className="flex items-center flex-col space-y-2">
-				<div className="flex space-x-2">
-					<Button
-						color="primary"
-						size="sm"
-						onPress={goFullScreen}
-						startContent={<Icon icon="bx:bx-fullscreen" width={18} />}
-					>
-						Plein écran
-					</Button>
-					<Button
-						color="secondary"
-						size="sm"
-						onPress={exportTemplate}
-						startContent={<Icon icon="mdi:export" width={18} />}
-					>
-						Exporter
-					</Button>
-				</div>
-				<div className="flex items-center space-x-2 bg-gray-100 p-1 rounded-xl">
-					<Button onPress={() => setZoom(1)} size="sm" color="warning" isIconOnly>
-						<Icon icon="mdi:restart" width={16} />
-					</Button>
-					<Button onPress={decreaseZoom} size="sm" color="warning" isIconOnly>
-						<Icon icon="bx:bx-minus" width={16} />
-					</Button>
-					<span className="font-semibold text-sm">{Math.round(zoom * 100)}%</span>
-					<Button onPress={increaseZoom} size="sm" color="warning" isIconOnly>
-						<Icon icon="bx:bx-plus" width={16} />
-					</Button>
-				</div>
-			</div>
+			<BottomSideBar
+				goFullScreen={goFullScreen}
+				exportTemplate={exportTemplate}
+				setZoom={setZoom}
+				increaseZoom={increaseZoom}
+				decreaseZoom={decreaseZoom}
+				zoom={zoom}
+			/>
 		</aside>
 	);
 };

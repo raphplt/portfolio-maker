@@ -38,34 +38,64 @@ const Portfolio: React.FC<PortfolioProps> = ({
 }) => {
 	const { primaryColor, secondaryColor, backgroundColor, textColor } = theme;
 
+	// Style de base pour un effet Neumorphism
+	const neumorphicStyle = {
+		background: backgroundColor,
+		borderRadius: "20px",
+		boxShadow:
+			"8px 8px 16px rgba(0,0,0,0.1), -8px -8px 16px rgba(255,255,255,0.7)",
+	};
+
 	return (
-		<div className="font-sans">
-			{/* Header Sticky */}
-			<header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
-				<div className="container mx-auto px-6 py-4 flex justify-between items-center">
-					<h1 className="text-2xl font-bold" style={{ color: primaryColor }}>
+		<div className="font-sans" style={{ backgroundColor }}>
+			{/* Header – barre de navigation fixe en Neumorphism subtil */}
+			<header
+				className="fixed top-0 left-0 right-0 z-50 p-4"
+				style={{
+					background: backgroundColor,
+					boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+				}}
+			>
+				<div className="container mx-auto flex justify-between items-center">
+					<h1 className="text-3xl font-bold" style={{ color: primaryColor }}>
 						{name}
 					</h1>
 					<nav>
-						<ul className="flex space-x-8">
+						<ul className="flex space-x-6">
 							<li>
-								<a href="#hero" className="hover:text-gray-700 transition-colors">
+								<a
+									href="#hero"
+									className="hover:text-gray-600 transition-colors"
+									style={{ color: textColor }}
+								>
 									Accueil
 								</a>
 							</li>
 							<li>
-								<a href="#projects" className="hover:text-gray-700 transition-colors">
-									Projets
+								<a
+									href="#projects"
+									className="hover:text-gray-600 transition-colors"
+									style={{ color: textColor }}
+								>
+									{projectsTitle}
 								</a>
 							</li>
 							<li>
-								<a href="#about" className="hover:text-gray-700 transition-colors">
-									À propos
+								<a
+									href="#about"
+									className="hover:text-gray-600 transition-colors"
+									style={{ color: textColor }}
+								>
+									{aboutTitle}
 								</a>
 							</li>
 							<li>
-								<a href="#contact" className="hover:text-gray-700 transition-colors">
-									Contact
+								<a
+									href="#contact"
+									className="hover:text-gray-600 transition-colors"
+									style={{ color: textColor }}
+								>
+									{contactTitle}
 								</a>
 							</li>
 						</ul>
@@ -73,42 +103,41 @@ const Portfolio: React.FC<PortfolioProps> = ({
 				</div>
 			</header>
 
-			{/* Section Hero */}
+			{/* Section Hero – Présentation dans une carte Neumorphique */}
 			<section
 				id="hero"
-				className="relative flex items-center justify-center min-h-screen pt-20 pb-10 text-center"
-				style={{
-					background: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), ${backgroundColor}`,
-				}}
+				className="pt-24 pb-16 flex items-center justify-center text-center"
 			>
-				<div className="container mx-auto px-6">
-					<h2
-						className="text-5xl md:text-6xl font-bold mb-6"
-						style={{ color: primaryColor }}
-					>
-						{welcomeTitle}
-					</h2>
-					<p className="text-xl md:text-2xl mb-8" style={{ color: textColor }}>
-						{description}
-					</p>
-					<Button
-						color="primary"
-						size="lg"
-						as={Link}
-						href="#projects"
-						className="px-8 py-4 text-lg font-semibold"
-						style={{ backgroundColor: primaryColor, borderColor: primaryColor }}
-					>
-						{ctaButtonText}
-						<span className="ml-2">
-							<Icon icon="akar-icons:arrow-right" />
-						</span>
-					</Button>
+				<div className="container mx-auto px-6" style={neumorphicStyle}>
+					<div className="p-10">
+						<h2
+							className="text-5xl md:text-6xl font-extrabold mb-4"
+							style={{ color: primaryColor }}
+						>
+							{welcomeTitle}
+						</h2>
+						<p className="text-xl md:text-2xl mb-8" style={{ color: textColor }}>
+							{description}
+						</p>
+						<Button
+							color="primary"
+							size="lg"
+							as={Link}
+							href="#projects"
+							className="px-8 py-4 text-lg font-semibold rounded-full"
+							style={{ backgroundColor: primaryColor, borderColor: primaryColor }}
+						>
+							{ctaButtonText}
+							<span className="ml-2">
+								<Icon icon="akar-icons:arrow-right" />
+							</span>
+						</Button>
+					</div>
 				</div>
 			</section>
 
-			{/* Section Projets */}
-			<section id="projects" className="py-20 bg-gray-50">
+			{/* Section Projets – Grille de cartes Neumorphiques */}
+			<section id="projects" className="py-20">
 				<div className="container mx-auto px-6">
 					<h2
 						className="text-4xl font-bold text-center mb-12"
@@ -117,12 +146,15 @@ const Portfolio: React.FC<PortfolioProps> = ({
 						{projectsTitle}
 					</h2>
 					{projects.length > 0 ? (
-						<div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+						<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 							{projects.map((project, index) => (
 								<Card
 									key={index}
-									className="p-6 rounded-lg hover:shadow-xl transition-shadow bg-white"
-									style={{ borderColor: secondaryColor, borderWidth: "1px" }}
+									className="p-6 rounded-lg transition-all"
+									style={{
+										...neumorphicStyle,
+										border: `1px solid ${secondaryColor}`,
+									}}
 								>
 									<h3
 										className="text-2xl font-semibold mb-4"
@@ -139,6 +171,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 										target="_blank"
 										color="secondary"
 										size="sm"
+										className="rounded-full"
 										style={{
 											backgroundColor: secondaryColor,
 											borderColor: secondaryColor,
@@ -157,7 +190,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 				</div>
 			</section>
 
-			{/* Section À propos */}
+			{/* Section À propos – Texte dans une carte Neumorphique */}
 			<section id="about" className="py-20">
 				<div className="container mx-auto px-6">
 					<h2
@@ -166,16 +199,16 @@ const Portfolio: React.FC<PortfolioProps> = ({
 					>
 						{aboutTitle}
 					</h2>
-					<div className="max-w-3xl mx-auto text-center">
-						<p className="text-lg leading-relaxed" style={{ color: "white" }}>
+					<div className="max-w-3xl mx-auto text-center p-8" style={neumorphicStyle}>
+						<p className="text-lg leading-relaxed" style={{ color: textColor }}>
 							{biography}
 						</p>
 					</div>
 				</div>
 			</section>
 
-			{/* Section Contact */}
-			<section id="contact" className="py-20 bg-gray-50">
+			{/* Section Contact – Coordonnées présentées dans une carte Neumorphique */}
+			<section id="contact" className="py-20">
 				<div className="container mx-auto px-6">
 					<h2
 						className="text-4xl font-bold text-center mb-12"
@@ -183,8 +216,8 @@ const Portfolio: React.FC<PortfolioProps> = ({
 					>
 						{contactTitle}
 					</h2>
-					<div className="max-w-xl mx-auto">
-						<div className="bg-white p-8 rounded-lg shadow-md">
+					<div className="max-w-xl mx-auto" style={neumorphicStyle}>
+						<div className="p-8">
 							<div className="space-y-6">
 								<div className="flex items-center">
 									<Icon
@@ -238,8 +271,11 @@ const Portfolio: React.FC<PortfolioProps> = ({
 
 			{/* Footer */}
 			<footer
-				className="bg-white py-6 shadow-inner"
-				style={{ borderTop: `2px solid ${primaryColor}` }}
+				className="py-6"
+				style={{
+					background: backgroundColor,
+					boxShadow: "0 -2px 4px rgba(0,0,0,0.1)",
+				}}
 			>
 				<div className="container mx-auto px-6 text-center">
 					<p className="text-lg" style={{ color: textColor }}>

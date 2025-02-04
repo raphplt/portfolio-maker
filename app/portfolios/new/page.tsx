@@ -39,8 +39,8 @@ const New = () => {
 						<CardBody>
 							<Image
 								src={`/templates/${template}.png`}
-								width={200}
-								height={200}
+								width={500}
+								height={500}
 								alt={template}
 								className="rounded-lg w-full h-48 object-cover"
 							/>

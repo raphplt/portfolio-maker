@@ -11,7 +11,7 @@ const SessionPopover = () => {
 	return (
 		<div>
 			{session && session.user ? (
-				<Popover className="flex items-center space-x-2 border">
+				<Popover className="flex items-center space-x-2 " backdrop="blur">
 					<PopoverTrigger>
 						<div className="flex items-center space-x-2 cursor-pointer">
 							{session.user.image && (
@@ -36,11 +36,16 @@ const SessionPopover = () => {
 								height={28}
 							/>
 						)}
-						<span className="text-sm font-medium">{session.user.name}</span>
+						<span className="">{session.user.name}</span>
 						<p>
 							<strong>{session.user.email}</strong>
 						</p>
-						<Button onPress={() => signOut()} color="danger" size="sm">
+						<Button
+							onPress={() => signOut()}
+							color="danger"
+							size="sm"
+							endContent={<Icon icon="mdi:logout" width={18} />}
+						>
 							Déconnexion
 						</Button>
 					</PopoverContent>

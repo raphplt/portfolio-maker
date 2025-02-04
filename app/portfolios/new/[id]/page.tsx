@@ -136,6 +136,7 @@ const PortfolioEditor = () => {
 			};
 		});
 	};
+
 	const handleSave = () => {
 		console.log("Données sauvegardées :", templateData);
 		setIsEditing(false);
@@ -144,7 +145,7 @@ const PortfolioEditor = () => {
 	const decreaseZoom = () => setZoom((prev) => Math.max(prev - 0.1, 0.5));
 	const increaseZoom = () => setZoom((prev) => Math.min(prev + 0.1, 2));
 
-	const exitFulLScreen = () => {
+	const exitFullScreen = () => {
 		setZoom(1);
 		setFullScreen((prev) => !prev);
 	};
@@ -157,8 +158,22 @@ const PortfolioEditor = () => {
 
 	return (
 		<>
+			{/* CSS Global pour masquer les scrollbars */}
+			<style jsx global>{`
+				/* Pour Chrome, Safari et Opera */
+				::-webkit-scrollbar {
+					display: none;
+				}
+				/* Pour Firefox */
+				html,
+				body {
+					scrollbar-width: none;
+					-ms-overflow-style: none;
+				}
+			`}</style>
+
 			<TopBar menuSelected={menuSelected} setMenuSelected={setMenuSelected} />
-			<div className="pt-20 flex flex-col md:flex-row bg-slate-900 min-h-screen overflow-hidden">
+			<div className="pt-20 flex flex-col md:flex-row bg-[#333333] min-h-screen overflow-hidden">
 				<div className="flex-1 p-6 md:mr-64">
 					<div
 						ref={editorRef}
@@ -186,7 +201,7 @@ const PortfolioEditor = () => {
 									style={{
 										display: fullScreen ? "block" : "none",
 									}}
-									onPress={exitFulLScreen}
+									onPress={exitFullScreen}
 								>
 									{fullScreen ? "Quitter le plein écran" : "Plein écran"}
 								</Button>
