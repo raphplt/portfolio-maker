@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import SessionPopover from "../Shared/SessionPopover";
+import SessionPopover from "../Shared/GithubPopover";
 import {
 	Button,
 	Card,

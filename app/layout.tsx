@@ -5,6 +5,7 @@ import NextAuthProvider from "@/components/Sessions/NextAuthProvider";
 import Footer from "@/components/Layout/Footer";
 import { Analytics } from "@vercel/analytics/react";
 import Seo from "@/components/Shared/Seo";
+import { SessionProvider } from "@/Contexts/SessionProvider";
 
 export const metadata: Metadata = {
 	title: "Portfolio Maker",
@@ -18,15 +19,17 @@ export default function RootLayout({
 }>) {
 	return (
 		<NextAuthProvider>
-			<html lang="fr">
-				<Seo />
-				<body className={`antialiased`}>
-					<Header />
-					{children}
-					<Footer />
-					<Analytics />
-				</body>
-			</html>
+			<SessionProvider>
+				<html lang="fr">
+					<Seo />
+					<body className={`antialiased`}>
+						<Header />
+						{children}
+						<Footer />
+						<Analytics />
+					</body>
+				</html>
+			</SessionProvider>
 		</NextAuthProvider>
 	);
 }
