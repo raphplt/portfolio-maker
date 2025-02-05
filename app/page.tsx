@@ -26,9 +26,9 @@ const Home = () => {
 
 	console.log(
 		"env",
-		process.env.GITHUB_CLIENT_ID,
+		process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID,
 		"env",
-		process.env.GITHUB_CLIENT_SECRET
+		process.env.NEXT_PUBLIC_GITHUB_CLIENT_SECRET
 	);
 
 	return (
