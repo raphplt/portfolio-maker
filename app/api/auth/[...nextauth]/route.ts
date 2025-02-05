@@ -4,6 +4,13 @@ import GitHubProvider from "next-auth/providers/github";
 import { JWT } from "next-auth/jwt";
 import { Session } from "next-auth";
 
+console.log("GITHUB_CLIENT_ID:", process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID);
+console.log(
+	"GITHUB_CLIENT_SECRET:",
+	process.env.NEXT_PUBLIC_GITHUB_CLIENT_SECRET
+);
+
+
 const authOptions = {
 	providers: [
 		GitHubProvider({
