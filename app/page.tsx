@@ -24,6 +24,13 @@ const Home = () => {
 		}, 600);
 	};
 
+	console.log(
+		"env",
+		process.env.GITHUB_CLIENT_ID,
+		"env",
+		process.env.GITHUB_CLIENT_SECRET
+	);
+
 	return (
 		<>
 			<main className="bg-background text-foreground">
