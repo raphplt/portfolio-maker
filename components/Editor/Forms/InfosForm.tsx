@@ -9,7 +9,7 @@ type InfosFormProps = {
 
 const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
 	return (
-		<Accordion defaultExpandedKeys={["1", "2"]} selectionMode="multiple">
+		<Accordion defaultExpandedKeys={["1"]} selectionMode="multiple">
 			<AccordionItem title="Informations générales" key={1}>
 				<div className="flex flex-col space-y-2 w-full">
 					<Input

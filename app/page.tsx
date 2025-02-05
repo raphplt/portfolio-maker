@@ -16,20 +16,12 @@ const Home = () => {
 	const [isAnimating, setIsAnimating] = useState(false);
 	const router = useRouter();
 
-	// Au clic, on lance l'animation et on redirige après 600ms
 	const handleClick = () => {
 		setIsAnimating(true);
 		setTimeout(() => {
 			router.push("/portfolios/new");
 		}, 600);
 	};
-
-	console.log(
-		"env",
-		process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID,
-		"env",
-		process.env.NEXT_PUBLIC_GITHUB_CLIENT_SECRET
-	);
 
 	return (
 		<>

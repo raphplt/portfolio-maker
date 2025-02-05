@@ -110,9 +110,9 @@ const Portfolio: React.FC<PortfolioProps> = ({
 								{welcomeTitle}
 							</h2>
 							<p
-								className="text-xl md:text-2xl mb-8 w-fit rounded-lg p-2"
+								className="text-lg md:text-xl mb-8 w-fit rounded-lg p-3"
 								style={{
-									color: textColor,
+									color: "white",
 									backdropFilter: "blur(10px)",
 									backgroundColor: "rgba(255, 255, 255, 0.3)",
 								}}
