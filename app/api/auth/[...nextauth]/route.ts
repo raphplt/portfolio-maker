@@ -1,4 +1,4 @@
-import NextAuth, { Account, Profile, SessionStrategy, User } from "next-auth";
+import NextAuth, { Account, SessionStrategy, User } from "next-auth";
 import GitHubProvider, { GithubProfile } from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -69,9 +69,10 @@ export const authOptions = {
 			account: Account;
 			profile: GithubProfile;
 		}) {
+			// On ne traite la création d'utilisateur que pour les providers externes
 			if (account.provider === "github" || account.provider === "google") {
 				try {
-					// Vérifier si l'utilisateur existe déjà dans la base de données
+					// Vérifier si l'utilisateur existe déjà dans la BDD via GET /users/email/:email
 					const checkUserRes = await fetch(
 						`${process.env.NEXT_PUBLIC_NEST_API_URL}/users/email/${user.email}`,
 						{
@@ -81,19 +82,19 @@ export const authOptions = {
 					);
 
 					console.log("user.email", user.email);
+					console.log("checkUserRes", checkUserRes.status);
 
-					console.log('checkUserRes', checkUserRes.status);
-
+					// Si l'utilisateur existe déjà (code 200), on autorise la connexion
 					if (checkUserRes.ok) {
 						console.log("L'utilisateur existe déjà");
-						return true; // L'utilisateur existe déjà, on autorise la connexion
+						return true;
 					}
 				} catch (error) {
 					console.error("Erreur lors de la vérification de l'utilisateur :", error);
-					return false; // Problème de vérification, on refuse la connexion
+					return false;
 				}
 
-				// Création de l'utilisateur s'il n'existe pas
+				// Si l'utilisateur n'existe pas, on utilise l'endpoint register de Nest
 				const nameParts = user.name ? user.name.split(" ") : [];
 				const firstName = nameParts[0] || "";
 				const lastName = nameParts.slice(1).join(" ") || "";
@@ -108,11 +109,12 @@ export const authOptions = {
 					return password;
 				}
 
+				// Préparation des données de l'utilisateur
 				const userData: Partial<UserInterface> = {
 					email: user.email ?? "",
 					firstName,
 					lastName,
-					password: generateRandomPassword(),
+					password: generateRandomPassword(), // Génération d'un mot de passe aléatoire
 				};
 
 				if (account.provider === "github" && profile?.login) {
@@ -120,11 +122,15 @@ export const authOptions = {
 				}
 
 				try {
-					const res = await fetch(`${process.env.NEXT_PUBLIC_NEST_API_URL}/users`, {
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify(userData),
-					});
+					// Appel à l'endpoint de registration (POST /auth/register)
+					const res = await fetch(
+						`${process.env.NEXT_PUBLIC_NEST_API_URL}/auth/register`,
+						{
+							method: "POST",
+							headers: { "Content-Type": "application/json" },
+							body: JSON.stringify(userData),
+						}
+					);
 
 					if (!res.ok) {
 						console.error(
@@ -151,7 +157,6 @@ export const authOptions = {
 		}) {
 			if (user || account) {
 				try {
-					// Récupérer les informations complètes depuis la base de données après connexion
 					const res = await fetch(
 						`${process.env.NEXT_PUBLIC_NEST_API_URL}/users/email/${token.email}`,
 						{
@@ -162,7 +167,7 @@ export const authOptions = {
 
 					if (res.ok) {
 						const dbUser = await res.json();
-						token.user = dbUser; // Stocker les infos de l'utilisateur en base de données
+						token.user = dbUser;
 					}
 				} catch (error) {
 					console.error(
@@ -175,7 +180,7 @@ export const authOptions = {
 		},
 		async session({ session, token }: { session: Session; token: JWT }) {
 			session.accessToken = token.accessToken as string;
-			session.user = token.user as UserInterface; // Utilisation des infos venant de la BDD
+			session.user = token.user as UserInterface;
 			return session;
 		},
 	},
