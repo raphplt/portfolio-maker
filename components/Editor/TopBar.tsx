@@ -2,7 +2,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import SessionPopover from "../Shared/GithubPopover";
 import {
 	Button,
 	Card,
@@ -18,6 +17,7 @@ import {
 import { MenusType } from "@/app/portfolios/new/[id]/helper";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { usePathname } from "next/navigation";
+import SessionPopover from "../Shared/SessionPopover";
 
 type TopBarProps = {
 	menuSelected: MenusType;

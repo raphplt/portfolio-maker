@@ -9,11 +9,11 @@ import React from "react";
 const SessionPopover = () => {
 	const { data: session, status } = useSession();
 
-	console.log("Session", session);
-
 	if (status === "loading") {
 		return <div>Loading...</div>;
 	}
+
+	console.log("session", session);
 
 	if (!session) {
 		console.log("no session");
@@ -34,8 +34,8 @@ const SessionPopover = () => {
 		<div>
 			<Popover className="flex items-center space-x-2 " backdrop="blur">
 				<PopoverTrigger>
-					<div className="flex items-center space-x-2 cursor-pointer">
-						{/* {session.user?.image && (
+					<Button color="secondary">
+						{session.user.image ? (
 							<Image
 								src={session.user.image}
 								alt="User Avatar"
@@ -43,16 +43,16 @@ const SessionPopover = () => {
 								width={28}
 								height={28}
 							/>
-						)} */}
+						) : (
+							<Icon icon="mdi:account-circle" width={28} />
+						)}
 						<span className="text-sm font-medium">
-							{session.user.firstName && session.user.lastName
-								? `${session.user.firstName} ${session.user.lastName}`
-								: session.user.name}
+							{session.user?.firstName || "Utilisateur"}
 						</span>
-					</div>
+					</Button>
 				</PopoverTrigger>
 				<PopoverContent className="flex flex-col p-4 space-y-2">
-					{session.user.image && (
+					{session.user.image ? (
 						<Image
 							src={session.user.image}
 							alt="User Avatar"
@@ -60,6 +60,8 @@ const SessionPopover = () => {
 							width={28}
 							height={28}
 						/>
+					) : (
+						<Icon icon="mdi:account-circle" width={28} />
 					)}
 					<span className="">{session.user?.name}</span>
 					<p>
