@@ -1,3 +1,4 @@
+// PortfolioEditor.tsx
 "use client";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
@@ -7,6 +8,7 @@ import {
 	MenusType,
 	Repository,
 	TemplateData,
+	TemplateDataKey,
 	templateDefaultData,
 } from "./helper";
 import TopBar from "@/components/Editor/TopBar";
@@ -78,7 +80,7 @@ const PortfolioEditor = () => {
 					}));
 				setTemplateData((prev) => ({
 					...prev,
-					projects,
+					projectList: projects,
 				}));
 				setHasFetchedProjects(true);
 			} catch (error) {
@@ -98,14 +100,12 @@ const PortfolioEditor = () => {
 		setIsEditing(!isEditing);
 	};
 
-	const handleChange = (field: string, value: string | boolean) => {
+	const handleChange = (field: TemplateDataKey, value: string | boolean) => {
 		setTemplateData((prev) => {
 			const keys = field.split(".");
 			const newData = { ...prev };
-
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			let current: any = newData;
-
 			keys.forEach((key, index) => {
 				if (index === keys.length - 1) {
 					current[key] = value;
@@ -114,7 +114,6 @@ const PortfolioEditor = () => {
 					current = current[key];
 				}
 			});
-
 			return newData;
 		});
 	};

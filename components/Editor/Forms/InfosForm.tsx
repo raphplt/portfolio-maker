@@ -1,10 +1,14 @@
+// InfosForm.tsx
 import React from "react";
 import { Accordion, AccordionItem, Input, Textarea } from "@heroui/react";
-import { TemplateData } from "@/app/portfolios/new/[id]/helper";
+import {
+	TemplateData,
+	TemplateDataKey,
+} from "@/app/portfolios/new/[id]/helper";
 
 type InfosFormProps = {
 	templateData: TemplateData;
-	handleChange: (field: keyof TemplateData, value: string) => void;
+	handleChange: (field: TemplateDataKey, value: string) => void;
 };
 
 const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
@@ -131,8 +135,7 @@ const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
 						label="Téléphone"
 						placeholder="Téléphone"
 						type="tel"
-						variant="bordered"
-						defaultValue={templateData.contact.phone}
+						value={templateData.contact.phone}
 						onChange={(e) => handleChange("contact.phone", e.target.value)}
 						isClearable
 						onClear={() => handleChange("contact.phone", "")}
@@ -142,8 +145,7 @@ const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
 						label="LinkedIn"
 						placeholder="LinkedIn"
 						type="url"
-						variant="bordered"
-						defaultValue={templateData.contact.linkedin}
+						value={templateData.contact.linkedin}
 						onChange={(e) => handleChange("contact.linkedin", e.target.value)}
 						isClearable
 						onClear={() => handleChange("contact.linkedin", "")}
@@ -153,8 +155,7 @@ const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
 						label="YouTube"
 						placeholder="YouTube"
 						type="url"
-						variant="bordered"
-						defaultValue={templateData.contact.youtube}
+						value={templateData.contact.youtube}
 						onChange={(e) => handleChange("contact.youtube", e.target.value)}
 						isClearable
 						onClear={() => handleChange("contact.youtube", "")}
@@ -164,8 +165,7 @@ const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
 						label="GitHub"
 						placeholder="GitHub"
 						type="url"
-						variant="bordered"
-						defaultValue={templateData.contact.github}
+						value={templateData.contact.github}
 						onChange={(e) => handleChange("contact.github", e.target.value)}
 						isClearable
 						onClear={() => handleChange("contact.github", "")}

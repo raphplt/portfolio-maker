@@ -1,11 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { Input } from "@heroui/react";
-import { TemplateData } from "@/app/portfolios/new/[id]/helper";
+import {
+	TemplateData,
+	TemplateDataKey,
+} from "@/app/portfolios/new/[id]/helper";
 
 type ColorsFormProps = {
 	templateData: TemplateData;
-	handleChange: (field: keyof TemplateData, value: string) => void;
+	handleChange: (field: TemplateDataKey, value: string) => void;
 };
 
 const ColorsForm = ({ templateData, handleChange }: ColorsFormProps) => {

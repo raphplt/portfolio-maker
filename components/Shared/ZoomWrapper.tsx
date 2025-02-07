@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useZoom } from "@/Contexts/ZoomContext";
+import { Button } from "@heroui/react";
 
 interface ZoomWrapperProps {
 	children: React.ReactNode;
@@ -55,18 +56,18 @@ const ZoomWrapper: React.FC<ZoomWrapperProps> = ({ children }) => {
 			}}
 		>
 			{children}
-			<button
+			<Button
 				style={{
 					display: fullScreen ? "block" : "none",
-					position: "absolute",
-					bottom: "4px",
-					right: "4px",
+					position: "fixed",
+					bottom: "20px",
+					right: "20px",
 					zIndex: 20,
 				}}
-				onClick={exitFullScreen}
+				onPress={exitFullScreen}
 			>
 				{fullScreen ? "Quitter le plein écran" : "Plein écran"}
-			</button>
+			</Button>
 		</div>
 	);
 };

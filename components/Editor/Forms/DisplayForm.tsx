@@ -1,9 +1,12 @@
-import { TemplateData } from "@/app/portfolios/new/[id]/helper";
+import {
+	TemplateData,
+	TemplateDataKey,
+} from "@/app/portfolios/new/[id]/helper";
 import { Switch } from "@heroui/react";
 
 type DisplayFormProps = {
 	templateData: TemplateData;
-	handleChange: (field: string, value: string | boolean) => void;
+	handleChange: (field: TemplateDataKey, value: boolean) => void;
 };
 
 const DisplayForm = ({ templateData, handleChange }: DisplayFormProps) => {

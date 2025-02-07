@@ -69,20 +69,27 @@ export interface TemplateData {
 	};
 }
 
-export type TemplateDataKey =
-	| keyof TemplateData
-	| `theme.${keyof TemplateData["theme"]}`;
+// Type utilitaire pour générer les clés imbriquées sous forme de chaîne
+export type NestedKeyOf<ObjectType extends object> = {
+	[Key in keyof ObjectType & string]: ObjectType[Key] extends object
+		? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}`
+		: `${Key}`;
+}[keyof ObjectType & string];
 
+// On définit le type des clés que l'on pourra utiliser dans handleChange
+export type TemplateDataKey = NestedKeyOf<TemplateData>;
+
+// Données par défaut
 export const templateDefaultData: TemplateData = {
 	informations: {
 		name: "Mon Portfolio",
-		description: "Bienvenue  sur mon portfolio personnel.",
+		description: "Bienvenue sur mon portfolio personnel.",
 		biography:
 			"Je suis un développeur passionné par la création de solutions web innovantes.",
 		welcomeTitle: "Bienvenue sur mon Portfolio",
 		ctaButtonText: "Découvrir mes projets",
 		logo: "path/to/logo.png",
-		profilePicture: "path/to/profilePicture.png",
+		profilePicture: "https://i.pravatar.cc/500",
 	},
 	sections: {
 		welcome: {
@@ -130,8 +137,6 @@ export const templateDefaultData: TemplateData = {
 	},
 };
 
-export type ComponentProps = TemplateDataKey;
-
 export type MenusType = "infos" | "colors" | "display";
 
 export enum Menus {
@@ -139,3 +144,6 @@ export enum Menus {
 	COLORS = "colors",
 	DISPLAY = "display",
 }
+
+// Ici, nous indiquons que les composants recevront toutes les données de TemplateData
+export type ComponentProps = TemplateData;
