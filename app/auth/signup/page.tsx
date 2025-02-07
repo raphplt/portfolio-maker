@@ -3,21 +3,17 @@
 import { Button, Divider, Form, Image, Input, Link } from "@heroui/react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { signIn, useSession } from "next-auth/react";
-import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-export default function SignInPage() {
+export default function SignUpPage() {
 	const { status } = useSession();
-	const searchParams = useSearchParams();
 	const router = useRouter();
-	const error = searchParams.get("error");
 	const [showPassword, setShowPassword] = useState(false);
 
-	useEffect(() => {
-		if (status === "authenticated") {
-			router.push("/");
-		}
-	}, [status, router]);
+	if (status === "authenticated") {
+		router.push("/");
+	}
 
 	if (status === "loading") {
 		return <div>Chargement...</div>;
@@ -41,23 +37,27 @@ export default function SignInPage() {
 				Retour
 			</Button>
 			<div className="flex flex-col items-center justify-center">
-				<h1 className="text-3xl font-bold text-center">Connexion à Penfolio</h1>
+				<h1 className="text-3xl font-bold text-center">Inscription à Penfolio</h1>
 
 				<p className="text-center text-default-500 my-3 w-1/3">
-					Connectez-vous pour accéder à votre compte et créer des portfolios.
+					Créez un compte pour commencer à créer des portfolios.
 				</p>
-
-				{error && (
-					<p style={{ color: "red" }}>
-						Une erreur est survenue lors de la connexion.
-					</p>
-				)}
 
 				<Form
 					method="post"
-					action="/api/auth/callback/credentials"
+					action="/api/auth/signup"
 					className="w-1/3 mt-6 flex flex-col space-y-1"
 				>
+					<div className="flex flex-row space-x-2">
+						<Input
+							name="firstName"
+							type="text"
+							required
+							size="lg"
+							placeholder="Prénom"
+						/>
+						<Input name="lastName" type="text" required size="lg" placeholder="Nom" />
+					</div>
 					<Input
 						name="email"
 						type="email"
@@ -89,12 +89,13 @@ export default function SignInPage() {
 						}
 					/>
 					<Button type="submit" color="primary" className="w-full">
-						Se connecter
+						S&apos;inscrire
 					</Button>
 				</Form>
-				<Link href="/auth/signup" className="text-default-500 mt-4">
-					Vous n&apos;avez pas de compte ? Inscrivez-vous
+				<Link href="/auth/signin" className="text-default-500 mt-4">
+					Vous avez déjà un compte ? Connectez-vous
 				</Link>
+
 				<div className=" space-y-2 w-1/3">
 					<Divider className="my-4" />
 					<Button
@@ -102,25 +103,25 @@ export default function SignInPage() {
 						startContent={<Icon icon="akar-icons:github-fill" width={20} />}
 						className="bg-black text-white w-full flex items-center justify-center py-2 px-4 rounded-lg"
 					>
-						Se connecter avec GitHub
+						S&apos;inscrire avec GitHub
 					</Button>
 					<Button
 						onPress={() => signIn("google")}
 						startContent={<Icon icon="flat-color-icons:google" width={20} />}
 						className="bg-white text-black border border-gray-300 w-full flex items-center justify-center py-2 px-4 rounded-lg"
 					>
-						Se connecter avec Google
+						S&apos;inscrire avec Google
 					</Button>
 				</div>
 			</div>
 			<Image
-				src="/Signin.jpg"
+				src="/Signup.jpg"
 				alt="Logo"
 				width={2000}
 				height={2000}
 				radius="lg"
 				className="object-cover rounded-lg max-h-screen p-2"
-				style={{ borderRadius: "30px" }} // Ajout du style inline pour le border-radius
+				style={{ borderRadius: "30px" }}
 			/>
 		</div>
 	);

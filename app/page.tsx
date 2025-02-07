@@ -37,7 +37,7 @@ const Home = () => {
 						variants={fadeIn}
 						className="text-7xl font-extrabold text-navy"
 					>
-						Portfolio Maker
+						Penfolio
 					</motion.h1>
 					<motion.h2
 						initial="hidden"

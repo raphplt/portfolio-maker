@@ -9,7 +9,10 @@ type InfosFormProps = {
 
 const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
 	return (
-		<Accordion defaultExpandedKeys={["1"]} selectionMode="multiple">
+		<Accordion
+			defaultExpandedKeys={["1", "2", "3", "4"]}
+			selectionMode="multiple"
+		>
 			<AccordionItem title="Informations générales" key={1}>
 				<div className="flex flex-col space-y-2 w-full">
 					<Input
@@ -18,10 +21,10 @@ const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
 						label="Nom"
 						type="text"
 						variant="bordered"
-						value={templateData.name}
-						onChange={(e) => handleChange("name", e.target.value)}
+						value={templateData.informations.name}
+						onChange={(e) => handleChange("informations.name", e.target.value)}
 						isClearable
-						onClear={() => handleChange("name", "")}
+						onClear={() => handleChange("informations.name", "")}
 					/>
 					<Input
 						id="description"
@@ -29,19 +32,21 @@ const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
 						placeholder="Description"
 						variant="bordered"
 						isClearable
-						onClear={() => handleChange("description", "")}
+						onClear={() => handleChange("informations.description", "")}
 						type="text"
-						value={templateData.description}
-						onChange={(e) => handleChange("description", e.target.value)}
+						value={templateData.informations.description}
+						onChange={(e) => handleChange("informations.description", e.target.value)}
 					/>
 					<Textarea
 						id="biography"
 						label="Biographie"
 						placeholder="Biographie"
 						variant="bordered"
-						value={templateData.biography}
-						onChange={(e) => handleChange("biography", e.target.value)}
+						value={templateData.informations.biography}
+						onChange={(e) => handleChange("informations.biography", e.target.value)}
 						rows={4}
+						isClearable
+						onClear={() => handleChange("informations.biography", "")}
 					/>
 					<Input
 						id="welcomeTitle"
@@ -49,14 +54,16 @@ const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
 						placeholder="Titre de bienvenue"
 						type="text"
 						variant="bordered"
-						value={templateData.welcomeTitle}
-						onChange={(e) => handleChange("welcomeTitle", e.target.value)}
+						value={templateData.informations.welcomeTitle}
+						onChange={(e) =>
+							handleChange("informations.welcomeTitle", e.target.value)
+						}
 						isClearable
-						onClear={() => handleChange("welcomeTitle", "")}
+						onClear={() => handleChange("informations.welcomeTitle", "")}
 					/>
 				</div>
 			</AccordionItem>
-			<AccordionItem title="Sections" key={2}>
+			<AccordionItem title="Titres de sections" key={2}>
 				<div className="flex flex-col space-y-2 w-full">
 					<Input
 						id="ctaButtonText"
@@ -64,10 +71,12 @@ const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
 						placeholder="Texte du bouton CTA"
 						type="text"
 						variant="bordered"
-						value={templateData.ctaButtonText}
-						onChange={(e) => handleChange("ctaButtonText", e.target.value)}
+						value={templateData.informations.ctaButtonText}
+						onChange={(e) =>
+							handleChange("informations.ctaButtonText", e.target.value)
+						}
 						isClearable
-						onClear={() => handleChange("ctaButtonText", "")}
+						onClear={() => handleChange("informations.ctaButtonText", "")}
 					/>
 					<Input
 						id="projectsTitle"
@@ -75,10 +84,10 @@ const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
 						placeholder="Titre de section Projets"
 						type="text"
 						variant="bordered"
-						value={templateData.projectsTitle}
-						onChange={(e) => handleChange("projectsTitle", e.target.value)}
+						value={templateData.sections.projects.title}
+						onChange={(e) => handleChange("sections.projects.title", e.target.value)}
 						isClearable
-						onClear={() => handleChange("projectsTitle", "")}
+						onClear={() => handleChange("sections.projects.title", "")}
 					/>
 					<Input
 						id="aboutTitle"
@@ -86,10 +95,10 @@ const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
 						placeholder="Titre de section À Propos"
 						type="text"
 						variant="bordered"
-						value={templateData.aboutTitle}
-						onChange={(e) => handleChange("aboutTitle", e.target.value)}
+						value={templateData.sections.about.title}
+						onChange={(e) => handleChange("sections.about.title", e.target.value)}
 						isClearable
-						onClear={() => handleChange("aboutTitle", "")}
+						onClear={() => handleChange("sections.about.title", "")}
 					/>
 					<Input
 						id="contactTitle"
@@ -97,10 +106,69 @@ const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
 						placeholder="Titre de section Contact"
 						type="text"
 						variant="bordered"
-						value={templateData.contactTitle}
-						onChange={(e) => handleChange("contactTitle", e.target.value)}
+						value={templateData.sections.contact.title}
+						onChange={(e) => handleChange("sections.contact.title", e.target.value)}
 						isClearable
-						onClear={() => handleChange("contactTitle", "")}
+						onClear={() => handleChange("sections.contact.title", "")}
+					/>
+				</div>
+			</AccordionItem>
+			<AccordionItem title="Contact" key={3}>
+				<div className="flex flex-col space-y-2 w-full">
+					<Input
+						id="email"
+						label="Email"
+						placeholder="Email"
+						type="email"
+						variant="bordered"
+						value={templateData.contact.email}
+						onChange={(e) => handleChange("contact.email", e.target.value)}
+						isClearable
+						onClear={() => handleChange("contact.email", "")}
+					/>
+					<Input
+						id="phone"
+						label="Téléphone"
+						placeholder="Téléphone"
+						type="tel"
+						variant="bordered"
+						defaultValue={templateData.contact.phone}
+						onChange={(e) => handleChange("contact.phone", e.target.value)}
+						isClearable
+						onClear={() => handleChange("contact.phone", "")}
+					/>
+					<Input
+						id="linkedin"
+						label="LinkedIn"
+						placeholder="LinkedIn"
+						type="url"
+						variant="bordered"
+						defaultValue={templateData.contact.linkedin}
+						onChange={(e) => handleChange("contact.linkedin", e.target.value)}
+						isClearable
+						onClear={() => handleChange("contact.linkedin", "")}
+					/>
+					<Input
+						id="youtube"
+						label="YouTube"
+						placeholder="YouTube"
+						type="url"
+						variant="bordered"
+						defaultValue={templateData.contact.youtube}
+						onChange={(e) => handleChange("contact.youtube", e.target.value)}
+						isClearable
+						onClear={() => handleChange("contact.youtube", "")}
+					/>
+					<Input
+						id="github"
+						label="GitHub"
+						placeholder="GitHub"
+						type="url"
+						variant="bordered"
+						defaultValue={templateData.contact.github}
+						onChange={(e) => handleChange("contact.github", e.target.value)}
+						isClearable
+						onClear={() => handleChange("contact.github", "")}
 					/>
 				</div>
 			</AccordionItem>

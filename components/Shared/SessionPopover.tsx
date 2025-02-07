@@ -18,9 +18,14 @@ const SessionPopover = () => {
 	if (!session) {
 		console.log("no session");
 		return (
-			<Button as={Link} href="/api/auth/signin" color="primary">
-				Connexion
-			</Button>
+			<>
+				<Button as={Link} href="/auth/signup" color="primary" variant="ghost">
+					Inscription
+				</Button>
+				<Button as={Link} href="/api/auth/signin" color="primary">
+					Connexion
+				</Button>
+			</>
 		);
 	}
 

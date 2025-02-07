@@ -8,7 +8,7 @@ import Seo from "@/components/Shared/Seo";
 import { SessionProvider } from "@/Contexts/SessionProvider";
 
 export const metadata: Metadata = {
-	title: "Portfolio Maker",
+	title: "Penfolio",
 	description: "Créez votre portfolio en quelques minutes",
 };
 

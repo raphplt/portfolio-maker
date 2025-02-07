@@ -19,14 +19,14 @@ const Header = () => {
 				href="/"
 			>
 				<Image src={"/Logo.png"} alt="Logo" width={32} height={32} />
-				Portfolio Maker
+				Penfolio
 			</Link>
 			<nav className="space-x-6 flex items-center">
-				<Link href="/" className="text-default-700 font-semibold">
+				<Link href="/" className="text-default-800 font-semibold">
 					Accueil
 				</Link>
 
-				<Link href="/portfolios/new" className="text-default-700 font-semibold">
+				<Link href="/portfolios/new" className="text-default-800 font-semibold">
 					Nouveau portfolio
 				</Link>
 				<SessionPopover />

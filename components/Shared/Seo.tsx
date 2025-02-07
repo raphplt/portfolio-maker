@@ -4,14 +4,14 @@ import React from "react";
 const Seo = () => {
 	return (
 		<Head>
-			<title>Portfolio Maker</title>
+			<title>Penfolio</title>
 			<meta
 				name="description"
 				content="Créez votre portfolio en quelques minutes"
 			/>
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
 			<meta name="robots" content="index, follow" />
-			<meta property="og:title" content="Portfolio Maker" />
+			<meta property="og:title" content="Penfolio" />
 			<meta
 				property="og:description"
 				content="Créez votre portfolio en quelques minutes"
@@ -20,7 +20,7 @@ const Seo = () => {
 			<meta property="og:url" content="https://votre-site.com" />
 			<meta property="og:image" content="https://votre-site.com/og-image.jpg" />
 			<meta name="twitter:card" content="summary_large_image" />
-			<meta name="twitter:title" content="Portfolio Maker" />
+			<meta name="twitter:title" content="Penfolio" />
 			<meta
 				name="twitter:description"
 				content="Créez votre portfolio en quelques minutes"

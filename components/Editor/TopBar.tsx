@@ -7,6 +7,7 @@ import {
 	Card,
 	CardBody,
 	CardHeader,
+	Divider,
 	Drawer,
 	DrawerBody,
 	DrawerContent,
@@ -47,34 +48,51 @@ const TopBar = ({ menuSelected, setMenuSelected }: TopBarProps) => {
 						</Button>
 						<Link href="/" className="flex items-center space-x-4 cursor-pointer">
 							<Image src={"/Logo.png"} alt="Logo" width={32} height={32} />
-							<span className="font-bold text-black">Portfolio Maker</span>
+							<span className="font-bold text-black">Penfolio</span>
 						</Link>
+						<div className="flex items-center space-x-2 ">
+							<Icon icon="mdi:chevron-right" width={20} />
+
+							<h3 className=" font-semibold">
+								{currentTemplate ? `${currentTemplate}` : "Choisir un template"}
+							</h3>
+						</div>
 					</div>
-					<div className="flex items-center space-x-5">
+					<div className="flex items-center space-x-4">
 						<Button
-							size="sm"
 							startContent={<Icon icon="eva:info-outline" />}
 							onPress={() => setMenuSelected("infos")}
 							style={
 								menuSelected === "infos"
-									? { backgroundColor: "#4F46E5", color: "#fff" }
+									? { backgroundColor: "#1FACC8", color: "#fff" }
 									: {}
 							}
 						>
 							Informations
 						</Button>
 						<Button
-							size="sm"
 							startContent={<Icon icon="eva:color-palette-outline" />}
 							onPress={() => setMenuSelected("colors")}
 							style={
 								menuSelected === "colors"
-									? { backgroundColor: "#4F46E5", color: "#fff" }
+									? { backgroundColor: "#1FACC8", color: "#fff" }
 									: {}
 							}
 						>
 							Couleurs
 						</Button>
+						<Button
+							startContent={<Icon icon="eva:monitor-outline" />}
+							onPress={() => setMenuSelected("display")}
+							style={
+								menuSelected === "display"
+									? { backgroundColor: "#1FACC8", color: "#fff" }
+									: {}
+							}
+						>
+							Affichage
+						</Button>
+						<Divider orientation="vertical" className="h-6" />
 
 						<SessionPopover />
 					</div>
@@ -88,7 +106,7 @@ const TopBar = ({ menuSelected, setMenuSelected }: TopBarProps) => {
 							<DrawerHeader className="flex flex-col gap-1">
 								<Link href="/" className="flex items-center space-x-4 cursor-pointer">
 									<Image src={"/Logo.png"} alt="Logo" width={32} height={32} />
-									<span className="font-bold text-black">Portfolio Maker</span>
+									<span className="font-bold text-black">Penfolio</span>
 								</Link>
 							</DrawerHeader>
 							<DrawerBody>
@@ -111,7 +129,7 @@ const TopBar = ({ menuSelected, setMenuSelected }: TopBarProps) => {
 											className=" text-white p-3 text-center font-semibold"
 											style={{
 												backgroundColor:
-													currentTemplate === template ? "#4F46E5" : "#BF8733",
+													currentTemplate === template ? "#1FACC8" : "#BF8733",
 											}}
 										>
 											{template}

@@ -3,39 +3,19 @@ import React from "react";
 import { Button, Card } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
+import { TemplateData } from "@/app/portfolios/new/[id]/helper";
 
-interface PortfolioProps {
-	name: string;
-	description: string;
-	biography: string;
-	welcomeTitle: string;
-	ctaButtonText: string;
-	projectsTitle: string;
-	aboutTitle: string;
-	contactTitle: string;
-	projects: { title: string; description: string; link: string }[];
-	contact: { email: string; phone: string; linkedin: string };
-	theme: {
-		primaryColor: string; // Accent néon (ex. néon bleu)
-		secondaryColor: string; // Accent complémentaire (ex. néon magenta)
-		backgroundColor: string; // Fond sombre (ex. noir ou anthracite)
-		textColor: string; // Texte clair (ex. gris clair ou blanc cassé)
-	};
-}
-
-const Portfolio: React.FC<PortfolioProps> = ({
-	name,
-	description,
-	biography,
-	welcomeTitle,
-	ctaButtonText,
-	projectsTitle,
-	aboutTitle,
-	contactTitle,
+const Portfolio: React.FC<TemplateData> = ({
+	informations: { name, welcomeTitle, description, biography, ctaButtonText },
+	sections: {
+		projects: { title: projectsTitle },
+		about: { title: aboutTitle },
+		contact: { title: contactTitle },
+	},
 	projects,
 	contact,
 	theme,
-}) => {
+}: TemplateData) => {
 	const { primaryColor, secondaryColor, backgroundColor, textColor } = theme;
 
 	return (
