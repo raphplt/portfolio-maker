@@ -66,13 +66,14 @@ export const authOptions = {
 			profile,
 		}: {
 			user: User;
-			account: Account;
-			profile: GithubProfile;
+			account: Account | null;
+			profile?: GithubProfile;
 		}) {
-			// On ne traite la création d'utilisateur que pour les providers externes
-			if (account.provider === "github" || account.provider === "google") {
+			if (
+				account &&
+				(account.provider === "github" || account.provider === "google")
+			) {
 				try {
-					// Vérifier si l'utilisateur existe déjà dans la BDD via GET /users/email/:email
 					const checkUserRes = await fetch(
 						`${process.env.NEXT_PUBLIC_NEST_API_URL}/users/email/${user.email}`,
 						{
@@ -81,10 +82,6 @@ export const authOptions = {
 						}
 					);
 
-					console.log("user.email", user.email);
-					console.log("checkUserRes", checkUserRes.status);
-
-					// Si l'utilisateur existe déjà (code 200), on autorise la connexion
 					if (checkUserRes.ok) {
 						console.log("L'utilisateur existe déjà");
 						return true;
@@ -94,7 +91,6 @@ export const authOptions = {
 					return false;
 				}
 
-				// Si l'utilisateur n'existe pas, on utilise l'endpoint register de Nest
 				const nameParts = user.name ? user.name.split(" ") : [];
 				const firstName = nameParts[0] || "";
 				const lastName = nameParts.slice(1).join(" ") || "";
@@ -109,12 +105,11 @@ export const authOptions = {
 					return password;
 				}
 
-				// Préparation des données de l'utilisateur
 				const userData: Partial<UserInterface> = {
 					email: user.email ?? "",
 					firstName,
 					lastName,
-					password: generateRandomPassword(), // Génération d'un mot de passe aléatoire
+					password: generateRandomPassword(),
 				};
 
 				if (account.provider === "github" && profile?.login) {
@@ -122,7 +117,6 @@ export const authOptions = {
 				}
 
 				try {
-					// Appel à l'endpoint de registration (POST /auth/register)
 					const res = await fetch(
 						`${process.env.NEXT_PUBLIC_NEST_API_URL}/auth/register`,
 						{
@@ -188,6 +182,11 @@ export const authOptions = {
 		strategy: "jwt" as SessionStrategy,
 	},
 	secret: process.env.NEXTAUTH_SECRET,
+	pages: {
+		signIn: "/auth/signin",
+		signOut: "/auth/signout",
+		error: "/auth/error",
+	},
 };
 
 const handler = NextAuth(authOptions);

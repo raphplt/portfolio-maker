@@ -18,13 +18,7 @@ const SessionPopover = () => {
 	if (!session) {
 		console.log("no session");
 		return (
-			<Button
-				as={Link}
-				href="/api/auth/signin"
-				size="sm"
-				color="primary"
-				startContent={<Icon icon="mdi:email" width={18} />}
-			>
+			<Button as={Link} href="/api/auth/signin" color="primary">
 				Connexion
 			</Button>
 		);

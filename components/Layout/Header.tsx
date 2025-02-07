@@ -8,7 +8,7 @@ import SessionPopover from "../Shared/SessionPopover";
 const Header = () => {
 	const pathname = usePathname();
 
-	if (pathname.startsWith("/portfolios/new")) {
+	if (pathname.startsWith("/portfolios/new") || pathname.startsWith("/auth")) {
 		return null;
 	}
 

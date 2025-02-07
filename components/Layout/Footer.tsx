@@ -1,9 +1,16 @@
 "use client";
 import { Link } from "@heroui/react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 const Footer = () => {
+	const pathname = usePathname();
+
+	if (pathname.startsWith("/portfolios") || pathname.startsWith("/auth")) {
+		return null;
+	}
+
 	return (
 		<footer className="bg-background text-foreground py-12 px-8">
 			<div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-8">
