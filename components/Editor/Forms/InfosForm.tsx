@@ -1,22 +1,12 @@
-// InfosForm.tsx
 import React from "react";
 import { Accordion, AccordionItem, Input, Textarea } from "@heroui/react";
-import {
-	TemplateData,
-	TemplateDataKey,
-} from "@/app/portfolios/new/[id]/helper";
+import { useFormContext } from "@/contexts/FormContext";
 
-type InfosFormProps = {
-	templateData: TemplateData;
-	handleChange: (field: TemplateDataKey, value: string) => void;
-};
+const InfosForm = () => {
+	const { handleChange, templateData } = useFormContext();
 
-const InfosForm = ({ templateData, handleChange }: InfosFormProps) => {
 	return (
-		<Accordion
-			defaultExpandedKeys={["1", "2", "3", "4"]}
-			selectionMode="multiple"
-		>
+		<Accordion defaultExpandedKeys={["1", "2", "3"]} selectionMode="multiple">
 			<AccordionItem title="Informations générales" key={1}>
 				<div className="flex flex-col space-y-2 w-full">
 					<Input

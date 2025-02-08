@@ -1,16 +1,10 @@
 import React from "react";
 import { Input } from "@heroui/react";
-import {
-	TemplateData,
-	TemplateDataKey,
-} from "@/app/portfolios/new/[id]/helper";
+import { useFormContext } from "@/contexts/FormContext";
 
-type ColorsFormProps = {
-	templateData: TemplateData;
-	handleChange: (field: TemplateDataKey, value: string) => void;
-};
+const ColorsForm = () => {
+	const { handleChange, templateData } = useFormContext();
 
-const ColorsForm = ({ templateData, handleChange }: ColorsFormProps) => {
 	return (
 		<>
 			<div className="space-y-2">

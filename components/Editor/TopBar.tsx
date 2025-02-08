@@ -15,17 +15,14 @@ import {
 	DrawerHeader,
 	useDisclosure,
 } from "@heroui/react";
-import { MenusType } from "@/app/portfolios/new/[id]/helper";
+import { Menus } from "@/app/portfolios/new/[id]/helper";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { usePathname } from "next/navigation";
 import SessionPopover from "../Shared/SessionPopover";
+import { useFormContext } from "@/contexts/FormContext";
 
-type TopBarProps = {
-	menuSelected: MenusType;
-	setMenuSelected: (menu: MenusType) => void;
-};
-
-const TopBar = ({ menuSelected, setMenuSelected }: TopBarProps) => {
+const TopBar = () => {
+	const { menuSelected, setMenuSelected } = useFormContext();
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const [templates, setTemplates] = useState<string[]>([]);
 
@@ -60,10 +57,10 @@ const TopBar = ({ menuSelected, setMenuSelected }: TopBarProps) => {
 					</div>
 					<div className="flex items-center space-x-4">
 						<Button
-							startContent={<Icon icon="eva:info-outline" />}
-							onPress={() => setMenuSelected("infos")}
+							startContent={<Icon icon="eva:info-outline" width={18} />}
+							onPress={() => setMenuSelected(Menus.INFOS)}
 							style={
-								menuSelected === "infos"
+								menuSelected === Menus.INFOS
 									? { backgroundColor: "#1FACC8", color: "#fff" }
 									: {}
 							}
@@ -71,10 +68,10 @@ const TopBar = ({ menuSelected, setMenuSelected }: TopBarProps) => {
 							Informations
 						</Button>
 						<Button
-							startContent={<Icon icon="eva:color-palette-outline" />}
-							onPress={() => setMenuSelected("colors")}
+							startContent={<Icon icon="eva:color-palette-outline" width={18} />}
+							onPress={() => setMenuSelected(Menus.COLORS)}
 							style={
-								menuSelected === "colors"
+								menuSelected === Menus.COLORS
 									? { backgroundColor: "#1FACC8", color: "#fff" }
 									: {}
 							}
@@ -82,10 +79,21 @@ const TopBar = ({ menuSelected, setMenuSelected }: TopBarProps) => {
 							Couleurs
 						</Button>
 						<Button
-							startContent={<Icon icon="eva:monitor-outline" />}
-							onPress={() => setMenuSelected("display")}
+							startContent={<Icon icon="tdesign:code" width={18} />}
+							onPress={() => setMenuSelected(Menus.PROJECTS)}
 							style={
-								menuSelected === "display"
+								menuSelected === Menus.PROJECTS
+									? { backgroundColor: "#1FACC8", color: "#fff" }
+									: {}
+							}
+						>
+							Projets
+						</Button>
+						<Button
+							startContent={<Icon icon="eva:monitor-outline" width={18} />}
+							onPress={() => setMenuSelected(Menus.DISPLAY)}
+							style={
+								menuSelected === Menus.DISPLAY
 									? { backgroundColor: "#1FACC8", color: "#fff" }
 									: {}
 							}

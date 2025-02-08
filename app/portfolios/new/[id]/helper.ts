@@ -137,12 +137,14 @@ export const templateDefaultData: TemplateData = {
 	},
 };
 
-export type MenusType = "infos" | "colors" | "display";
+export type MenusType = "infos" | "colors" | "display" | "export" | "projects";
 
 export enum Menus {
 	INFOS = "infos",
 	COLORS = "colors",
 	DISPLAY = "display",
+	EXPORT = "export",
+	PROJECTS = "projects",
 }
 
 // Ici, nous indiquons que les composants recevront toutes les données de TemplateData

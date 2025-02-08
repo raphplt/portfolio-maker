@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { useZoom } from "@/Contexts/ZoomContext";
+import { useZoom } from "@/contexts/ZoomContext";
 import { Button } from "@heroui/react";
 
 interface ZoomWrapperProps {

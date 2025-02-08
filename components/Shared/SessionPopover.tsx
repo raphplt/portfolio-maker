@@ -13,8 +13,6 @@ const SessionPopover = () => {
 		return <div>Loading...</div>;
 	}
 
-	console.log("session", session);
-
 	if (!session) {
 		console.log("no session");
 		return (

@@ -1,36 +1,24 @@
-// Form.tsx
 import React from "react";
-import {
-	Menus,
-	MenusType,
-	TemplateData,
-	TemplateDataKey,
-} from "@/app/portfolios/new/[id]/helper";
 import ColorsForm from "./Forms/ColorsForm";
 import InfosForm from "./Forms/InfosForm";
 import DisplayForm from "./Forms/DisplayForm";
+import ProjectsForm from "./Forms/ProjectsForm";
+import { useFormContext } from "@/contexts/FormContext";
+import { Menus } from "@/app/portfolios/new/[id]/helper";
 
-type FormProps = {
-	templateData: TemplateData;
-	handleChange: (field: TemplateDataKey, value: string | boolean) => void;
-	menuSelected: MenusType;
-};
+const Form = () => {
+	const { menuSelected } = useFormContext();
 
-const Form = ({ templateData, handleChange, menuSelected }: FormProps) => {
 	const renderFormContent = () => {
 		switch (menuSelected) {
 			case Menus.INFOS:
-				return (
-					<InfosForm templateData={templateData} handleChange={handleChange} />
-				);
+				return <InfosForm />;
 			case Menus.COLORS:
-				return (
-					<ColorsForm templateData={templateData} handleChange={handleChange} />
-				);
+				return <ColorsForm />;
 			case Menus.DISPLAY:
-				return (
-					<DisplayForm templateData={templateData} handleChange={handleChange} />
-				);
+				return <DisplayForm />;
+			case Menus.PROJECTS:
+				return <ProjectsForm />;
 			default:
 				return null;
 		}
@@ -44,6 +32,8 @@ const Form = ({ templateData, handleChange, menuSelected }: FormProps) => {
 				return "Couleurs";
 			case Menus.DISPLAY:
 				return "Affichage";
+			case Menus.PROJECTS:
+				return "Projets";
 			default:
 				return null;
 		}

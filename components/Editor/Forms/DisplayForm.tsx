@@ -1,15 +1,9 @@
-import {
-	TemplateData,
-	TemplateDataKey,
-} from "@/app/portfolios/new/[id]/helper";
+import { useFormContext } from "@/contexts/FormContext";
 import { Switch } from "@heroui/react";
 
-type DisplayFormProps = {
-	templateData: TemplateData;
-	handleChange: (field: TemplateDataKey, value: boolean) => void;
-};
+const DisplayForm = () => {
+	const { handleChange, templateData } = useFormContext();
 
-const DisplayForm = ({ templateData, handleChange }: DisplayFormProps) => {
 	return (
 		<>
 			<Switch
