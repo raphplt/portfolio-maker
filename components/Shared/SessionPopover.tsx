@@ -31,7 +31,7 @@ const SessionPopover = () => {
 		<div>
 			<Popover className="flex items-center space-x-2 " backdrop="blur">
 				<PopoverTrigger>
-					<Button color="secondary">
+					<Button color="primary" variant="ghost">
 						{session.user.image ? (
 							<Image
 								src={session.user.image}
@@ -43,7 +43,7 @@ const SessionPopover = () => {
 						) : (
 							<Icon icon="mdi:account-circle" width={28} />
 						)}
-						<span className="text-sm font-medium">
+						<span className="text-sm font-semibold">
 							{session.user?.firstName || "Utilisateur"}
 						</span>
 					</Button>

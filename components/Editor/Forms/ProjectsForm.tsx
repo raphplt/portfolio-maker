@@ -1,10 +1,8 @@
-import { useFormContext } from "@/contexts/FormContext";
-import React, { useState } from "react";
+import React from "react";
+import ManualImport from "../Modals/ManualImport";
+import ProjectList from "../ProjectList";
 
 const ProjectsForm = () => {
-	const { handleChange, templateData } = useFormContext();
-	const [showModalManualImport, setShowModalManualImport] = useState(false);
-	const [showModalGithubImport, setShowModalGithubImport] = useState(false);
 	// Fonction de récupération des projets GitHub
 	// const fetchGithubProjects = useCallback(
 	// 	async (accessToken: string) => {
@@ -52,8 +50,8 @@ const ProjectsForm = () => {
 
 	return (
 		<div>
-			<h1>ProjectsForm</h1>
-			{templateData.projectList.length}
+			<ManualImport />
+			<ProjectList />
 		</div>
 	);
 };

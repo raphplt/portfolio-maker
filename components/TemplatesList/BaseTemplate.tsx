@@ -30,7 +30,7 @@ const Portfolio = ({
 			style={{ backgroundColor, color: textColor }}
 		>
 			{/* Header */}
-			<header className="flex justify-between items-center px-8 py-6 bg-black text-gray-100">
+			<header className="flex justify-between items-center px-8 py-6 bg-black text-gray-100 fixed top-0 left-0 w-full z-10">
 				<a href="#" className="flex items-center space-x-2">
 					<h1 className="text-lg font-semibold">{name}</h1>
 					{logo && <img src={logo} alt="Logo" className="w-8 h-8" />}
@@ -117,21 +117,23 @@ const Portfolio = ({
 						{projects.title}
 					</h2>
 					<ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-						{projectList.map((project, index) => (
-							<li
-								key={index}
-								className="p-6 bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-							>
-								<h3 className="text-xl font-bold text-white">{project.title}</h3>
-								<p className="text-gray-400 mt-2">{project.description}</p>
-								<a
-									href={project.link}
-									className="mt-4 inline-block text-yellow-500 font-semibold hover:underline"
+						{projectList &&
+							projectList.length > 0 &&
+							projectList.map((project, index) => (
+								<li
+									key={index}
+									className="p-6 bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow"
 								>
-									Voir le projet →
-								</a>
-							</li>
-						))}
+									<h3 className="text-xl font-bold text-white">{project.title}</h3>
+									<p className="text-gray-400 mt-2">{project.description}</p>
+									<a
+										href={project.link}
+										className="mt-4 inline-block text-yellow-500 font-semibold hover:underline"
+									>
+										Voir le projet →
+									</a>
+								</li>
+							))}
 					</ul>
 				</section>
 			)}
