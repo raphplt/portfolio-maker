@@ -1,23 +1,38 @@
 import { Spinner } from "@heroui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import ZoomWrapper from "../Shared/ZoomWrapper";
 import SideBar from "./SideBar";
 import TopBar from "./TopBar";
 import { useFormContext } from "@/contexts/FormContext";
 import exportToHTML from "@/utils/export";
 import { TemplateData } from "@/app/portfolios/new/[id]/helper";
+import { useSessionContext } from "@/contexts/SessionProvider";
 
 interface MainProps {
 	Component: React.ComponentType<TemplateData> | null;
+	id: string;
 }
 
-const Main: React.FC<MainProps> = ({ Component }) => {
-	const { templateData } = useFormContext();
+const Main: React.FC<MainProps> = ({ Component, id }) => {
+	const { templateData, setTemplateData } = useFormContext();
+
+	const { usersTemplates } = useSessionContext();
+
 	const handleExport = () => {
 		if (Component) {
 			exportToHTML(Component, templateData);
 		}
 	};
+
+	const template = usersTemplates.find(
+		(template) => parseInt(String(template.id)) === parseInt(String(id))
+	);
+
+	useEffect(() => {
+		if (template) {
+			setTemplateData(template);
+		}
+	}, [setTemplateData, template]);
 
 	return (
 		<main>

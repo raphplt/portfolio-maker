@@ -2,17 +2,19 @@
 
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { ComponentProps } from "./helper";
 import { FormProvider } from "@/contexts/FormContext";
 import { ZoomProvider } from "@/contexts/ZoomContext";
 import Main from "@/components/Editor/Main";
 import { useSessionContext } from "@/contexts/SessionProvider";
+import { ComponentProps } from "../../new/[id]/helper";
 
 const PortfolioEditor = () => {
 	const { id } = useParams();
 	const { usersTemplates } = useSessionContext();
 
-	const template = usersTemplates.find((template) => template.id === id);
+	const template = usersTemplates.find(
+		(template) => parseInt(String(template.id)) === parseInt(String(id))
+	);
 
 	const [Component, setComponent] =
 		useState<React.ComponentType<ComponentProps> | null>(null);
@@ -48,7 +50,7 @@ const PortfolioEditor = () => {
 					}
 				`}</style>
 
-				<Main Component={Component} />
+				<Main Component={Component} id={String(id)} />
 			</FormProvider>
 		</ZoomProvider>
 	);

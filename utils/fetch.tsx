@@ -1,6 +1,8 @@
 import { Repository } from "@/app/portfolios/new/[id]/helper";
 import { Session } from "next-auth";
 
+export const api_url = process.env.NEXT_PUBLIC_NEST_API_URL;
+
 export const fetchGithubProjects = async (
 	accessToken: string,
 	setProjects: (
@@ -36,7 +38,6 @@ export const fetchGithubProjects = async (
 				description: repo.description || "Aucune description",
 				link: repo.html_url,
 			}));
-		console.log("projects", projects);
 		setProjects(projects);
 		setHasFetchedProjects(true);
 	} catch (error) {

@@ -10,6 +10,9 @@ export interface Repository {
 }
 
 export interface TemplateData {
+	id?: string;
+	templateName?: string;
+	templateTitle?: string;
 	informations: {
 		name: string;
 		description: string;

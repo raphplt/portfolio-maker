@@ -23,6 +23,7 @@ interface FormContextType {
 	setMenuSelected: React.Dispatch<React.SetStateAction<MenusType>>;
 	isEditing: boolean;
 	setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+
 }
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
@@ -35,7 +36,6 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 
 	const handleChange = useCallback(
 		(field: TemplateDataKey, value: string | boolean) => {
-			console.log("field", field);
 			setTemplateData((prev) => {
 				const keys = field.split(".");
 				const newData = { ...prev };
@@ -55,6 +55,8 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 		[]
 	);
 
+
+
 	const handleSave = useCallback(() => {
 		console.log("Données sauvegardées :", templateData);
 	}, [templateData]);
@@ -70,6 +72,7 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 				setMenuSelected,
 				isEditing,
 				setIsEditing,
+			
 			}}
 		>
 			{children}

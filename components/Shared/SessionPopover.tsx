@@ -60,10 +60,33 @@ const SessionPopover = () => {
 					) : (
 						<Icon icon="mdi:account-circle" width={28} />
 					)}
-					<span className="">{session.user?.name}</span>
-					<p>
-						<strong>{session.user.email}</strong>
-					</p>
+					<div className="flex flex-col items-center">
+						<span className="">
+							{session.user?.firstName} {session.user?.lastName}
+						</span>
+						<p className="text-sm text-default-500">{session.user.email}</p>
+					</div>
+					<Button
+						as={Link}
+						href="/protected/account"
+						color="default"
+						variant="ghost"
+						className="w-full"
+						startContent={<Icon icon="mdi:account" width={18} />}
+					>
+						Mon compte
+					</Button>
+					<Button
+						as={Link}
+						href="/protected/portfolios"
+						color="default"
+						variant="ghost"
+						className="w-full"
+						startContent={<Icon icon="ic:baseline-web-stories" width={18} />}
+					>
+						Mes portfolios
+					</Button>
+
 					<Button
 						onPress={() => signOut()}
 						color="danger"
