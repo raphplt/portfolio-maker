@@ -40,6 +40,7 @@ const ManualImport = () => {
 				onPress={onOpen}
 				endContent={<Icon icon="akar-icons:plus" />}
 				color="primary"
+				className="w-full"
 			>
 				Ajouter un projet
 			</Button>

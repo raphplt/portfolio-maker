@@ -46,7 +46,7 @@ export default function SignUpPage() {
 				<Form
 					method="post"
 					action="/api/auth/signup"
-					className="w-1/3 mt-6 flex flex-col space-y-1"
+					className="w-1/2 2xl:w-1/3 mt-6 flex flex-col space-y-1"
 				>
 					<div className="flex flex-row space-x-2">
 						<Input

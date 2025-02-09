@@ -146,35 +146,45 @@ export const authOptions = {
 			account,
 		}: {
 			token: JWT;
-			user: User;
-			account: Account;
+			user?: User;
+			account?: Account;
 		}) {
-			if (user || account) {
-				try {
-					const res = await fetch(
-						`${process.env.NEXT_PUBLIC_NEST_API_URL}/users/email/${token.email}`,
-						{
-							method: "GET",
-							headers: { "Content-Type": "application/json" },
-						}
-					);
+			// Lorsque l'utilisateur se connecte (la première fois)
+			if (account) {
+				// Pour les connexions via OAuth (GitHub, Google, etc.)
+				token.accessToken = account.access_token;
+				token.refreshToken = account.refresh_token;
+			} else if (user && (user as any).accessToken) {
+				// Pour le provider "credentials", vous avez retourné user.accessToken
+				token.accessToken = (user as any).accessToken;
+			}
 
-					if (res.ok) {
-						const dbUser = await res.json();
-						token.user = dbUser;
+			// Vous pouvez conserver ou ajouter d'autres informations dans le token.
+			try {
+				const res = await fetch(
+					`${process.env.NEXT_PUBLIC_NEST_API_URL}/users/email/${token.email}`,
+					{
+						method: "GET",
+						headers: { "Content-Type": "application/json" },
 					}
-				} catch (error) {
-					console.error(
-						"Erreur lors de la récupération des infos utilisateur :",
-						error
-					);
+				);
+				if (res.ok) {
+					const dbUser = await res.json();
+					token.user = dbUser;
 				}
+			} catch (error) {
+				console.error(
+					"Erreur lors de la récupération des infos utilisateur :",
+					error
+				);
 			}
 			return token;
 		},
 		async session({ session, token }: { session: Session; token: JWT }) {
 			session.accessToken = token.accessToken as string;
 			session.user = token.user as UserInterface;
+			// Vous pouvez également ajouter le refresh token dans la session si nécessaire
+			session.refreshToken = token.refreshToken as string;
 			return session;
 		},
 	},

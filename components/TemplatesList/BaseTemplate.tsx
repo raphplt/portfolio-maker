@@ -33,7 +33,7 @@ const Portfolio = ({
 			<header className="flex justify-between items-center px-8 py-6 bg-black text-gray-100 fixed top-0 left-0 w-full z-10">
 				<a href="#" className="flex items-center space-x-2">
 					<h1 className="text-lg font-semibold">{name}</h1>
-					{logo && <img src={logo} alt="Logo" className="w-8 h-8" />}
+					{/* {logo && <img src={logo} alt="Logo" className="w-8 h-8" />} */}
 				</a>
 				<nav className="">
 					<ul className="flex space-x-8 text-sm font-medium">

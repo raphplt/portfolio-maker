@@ -56,7 +56,7 @@ export default function SignInPage() {
 				<Form
 					method="post"
 					action="/api/auth/callback/credentials"
-					className="w-1/3 mt-6 flex flex-col space-y-1"
+					className="w-1/2 2xl:w-1/3 mt-6 flex flex-col space-y-1"
 				>
 					<Input
 						name="email"
@@ -120,7 +120,7 @@ export default function SignInPage() {
 				height={2000}
 				radius="lg"
 				className="object-cover rounded-lg max-h-screen p-2"
-				style={{ borderRadius: "30px" }} // Ajout du style inline pour le border-radius
+				style={{ borderRadius: "30px" }}
 			/>
 		</div>
 	);

@@ -9,6 +9,7 @@ declare module "next-auth" {
 			login?: string;
 			accessToken?: string;
 			refreshToken?: string;
+			githubUsername?: string;
 		} & DefaultSession["user"];
 	}
 }

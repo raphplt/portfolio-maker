@@ -17,11 +17,11 @@ const ProjectList = () => {
 		<div className="flex flex-col space-y-4 py-3">
 			{templateData.projectList.map((project, index) => (
 				<Card key={index}>
-					<CardHeader>
+					<CardHeader className="flex justify-between items-center">
 						<h2 className="font-semibold">{project.title}</h2>
 						<Popover>
 							<PopoverTrigger>
-								<Button isIconOnly>
+								<Button isIconOnly size="sm">
 									<Icon icon="mage:dots" />
 								</Button>
 							</PopoverTrigger>
