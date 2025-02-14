@@ -48,7 +48,7 @@ const PortfolioEditor = () => {
 					}
 				`}</style>
 
-				<Main Component={Component} />
+				<Main Component={Component} id={String(id)} />
 			</FormProvider>
 		</ZoomProvider>
 	);
