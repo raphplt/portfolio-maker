@@ -1,10 +1,11 @@
-import NextAuth, { Account, SessionStrategy, User } from "next-auth";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import GitHubProvider, { GithubProfile } from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { JWT } from "next-auth/jwt";
 import { Session } from "next-auth";
 import { UserInterface } from "@/type/user";
+import NextAuth from "next-auth/next";
 
 export const authOptions = {
 	providers: [
@@ -65,8 +66,8 @@ export const authOptions = {
 			account,
 			profile,
 		}: {
-			user: User;
-			account: Account | null;
+			user: any;
+			account: any | null;
 			profile?: GithubProfile;
 		}) {
 			if (
@@ -146,20 +147,16 @@ export const authOptions = {
 			account,
 		}: {
 			token: JWT;
-			user?: User;
-			account?: Account;
+			user?: any;
+			account?: any;
 		}) {
-			// Lorsque l'utilisateur se connecte (la première fois)
 			if (account) {
-				// Pour les connexions via OAuth (GitHub, Google, etc.)
 				token.accessToken = account.access_token;
 				token.refreshToken = account.refresh_token;
-			} else if (user && (user as any).accessToken) {
-				// Pour le provider "credentials", vous avez retourné user.accessToken
-				token.accessToken = (user as any).accessToken;
+			} else if (user && user.accessToken) {
+				token.accessToken = user.accessToken;
 			}
 
-			// Vous pouvez conserver ou ajouter d'autres informations dans le token.
 			try {
 				const res = await fetch(
 					`${process.env.NEXT_PUBLIC_NEST_API_URL}/users/email/${token.email}`,
@@ -183,13 +180,12 @@ export const authOptions = {
 		async session({ session, token }: { session: Session; token: JWT }) {
 			session.accessToken = token.accessToken as string;
 			session.user = token.user as UserInterface;
-			// Vous pouvez également ajouter le refresh token dans la session si nécessaire
 			session.refreshToken = token.refreshToken as string;
 			return session;
 		},
 	},
 	session: {
-		strategy: "jwt" as SessionStrategy,
+		strategy: "jwt" as any,
 	},
 	secret: process.env.NEXTAUTH_SECRET,
 	pages: {
@@ -200,5 +196,5 @@ export const authOptions = {
 	},
 };
 
-const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions as any);
 export { handler as GET, handler as POST };

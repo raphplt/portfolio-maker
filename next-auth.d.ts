@@ -2,6 +2,7 @@ import { DefaultSession, DefaultJWT } from "next-auth";
 
 declare module "next-auth" {
 	interface Session extends DefaultSession {
+		refreshToken: string;
 		accessToken?: string;
 		user: {
 			id: number;
