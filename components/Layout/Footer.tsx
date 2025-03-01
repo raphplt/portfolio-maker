@@ -1,16 +1,23 @@
 "use client";
 import { Link } from "@heroui/react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 const Footer = () => {
+	const pathname = usePathname();
+
+	if (pathname.startsWith("/portfolios") || pathname.startsWith("/auth")) {
+		return null;
+	}
+
 	return (
 		<footer className="bg-background text-foreground py-12 px-8">
 			<div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-8">
 				<div className="col-span-1">
 					<Link href="/" className="flex items-center gap-4">
 						<Image src={"/Logo.png"} alt="Logo" width={32} height={32} />
-						<span className="font-bold text-lg">Portfolio Maker</span>
+						<span className="font-bold text-lg">Penfolio</span>
 					</Link>
 					<p className="mt-4 text-default-700">
 						Créez un portfolio professionnel en quelques minutes, sans effort.
@@ -93,7 +100,7 @@ const Footer = () => {
 				</div>
 			</div>
 			<div className="mt-12 text-center text-default-700">
-				&copy; {new Date().getFullYear()} Portfolio Maker. Tous droits réservés.
+				&copy; {new Date().getFullYear()} Penfolio. Tous droits réservés.
 			</div>
 		</footer>
 	);

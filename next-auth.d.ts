@@ -4,8 +4,14 @@ declare module "next-auth" {
 	interface Session extends DefaultSession {
 		accessToken?: string;
 		user: {
-			/** Nom de l'utilisateur tel que récupéré sur GitHub (login) */
+			id: number;
+			firstName?: string;
+			lastName?: string;
+			avatar?: string;
 			login?: string;
+			accessToken?: string;
+			refreshToken?: string;
+			githubUsername?: string;
 		} & DefaultSession["user"];
 	}
 }

@@ -1,14 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { Input } from "@heroui/react";
-import { TemplateData } from "@/app/portfolios/new/[id]/helper";
+import { useFormContext } from "@/contexts/FormContext";
 
-type ColorsFormProps = {
-	templateData: TemplateData;
-	handleChange: (field: keyof TemplateData, value: string) => void;
-};
+const ColorsForm = () => {
+	const { handleChange, templateData } = useFormContext();
 
-const ColorsForm = ({ templateData, handleChange }: ColorsFormProps) => {
 	return (
 		<>
 			<div className="space-y-2">
@@ -19,7 +15,7 @@ const ColorsForm = ({ templateData, handleChange }: ColorsFormProps) => {
 					id="primaryColor"
 					type="color"
 					value={templateData.theme.primaryColor}
-					onChange={(e) => handleChange("primaryColor" as any, e.target.value)}
+					onChange={(e) => handleChange("theme.primaryColor", e.target.value)}
 				/>
 			</div>
 			<div className="space-y-2">
@@ -30,7 +26,7 @@ const ColorsForm = ({ templateData, handleChange }: ColorsFormProps) => {
 					id="secondaryColor"
 					type="color"
 					value={templateData.theme.secondaryColor}
-					onChange={(e) => handleChange("secondaryColor" as any, e.target.value)}
+					onChange={(e) => handleChange("theme.secondaryColor", e.target.value)}
 				/>
 			</div>
 			<div className="space-y-2">
@@ -41,7 +37,7 @@ const ColorsForm = ({ templateData, handleChange }: ColorsFormProps) => {
 					id="backgroundColor"
 					type="color"
 					value={templateData.theme.backgroundColor}
-					onChange={(e) => handleChange("backgroundColor" as any, e.target.value)}
+					onChange={(e) => handleChange("theme.backgroundColor", e.target.value)}
 				/>
 			</div>
 			<div className="space-y-2">
@@ -52,7 +48,7 @@ const ColorsForm = ({ templateData, handleChange }: ColorsFormProps) => {
 					id="textColor"
 					type="color"
 					value={templateData.theme.textColor}
-					onChange={(e) => handleChange("textColor" as any, e.target.value)}
+					onChange={(e) => handleChange("theme.textColor", e.target.value)}
 				/>
 			</div>
 		</>

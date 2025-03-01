@@ -1,54 +1,48 @@
 import React from "react";
-import { TemplateData } from "@/app/portfolios/new/[id]/helper";
-import { Button } from "@heroui/react";
-import { Icon } from "@iconify/react/dist/iconify.js";
 import ColorsForm from "./Forms/ColorsForm";
 import InfosForm from "./Forms/InfosForm";
+import DisplayForm from "./Forms/DisplayForm";
+import ProjectsForm from "./Forms/ProjectsForm";
+import { useFormContext } from "@/contexts/FormContext";
+import { Menus } from "@/app/portfolios/new/[id]/helper";
 
-type FormProps = {
-	templateData: TemplateData;
-	handleChange: (field: keyof TemplateData, value: string) => void;
-	handleSave: () => void;
-	menuSelected: "infos" | "colors";
-};
+const Form = () => {
+	const { menuSelected } = useFormContext();
 
-const Form = ({
-	templateData,
-	handleChange,
-	handleSave,
-	menuSelected,
-}: FormProps) => {
 	const renderFormContent = () => {
 		switch (menuSelected) {
-			case "infos":
-				return (
-					<InfosForm templateData={templateData} handleChange={handleChange} />
-				);
-			case "colors":
-				return (
-					<ColorsForm templateData={templateData} handleChange={handleChange} />
-				);
+			case Menus.INFOS:
+				return <InfosForm />;
+			case Menus.COLORS:
+				return <ColorsForm />;
+			case Menus.DISPLAY:
+				return <DisplayForm />;
+			case Menus.PROJECTS:
+				return <ProjectsForm />;
+			default:
+				return null;
+		}
+	};
+
+	const renderTitle = () => {
+		switch (menuSelected) {
+			case Menus.INFOS:
+				return "Informations générales";
+			case Menus.COLORS:
+				return "Couleurs";
+			case Menus.DISPLAY:
+				return "Affichage";
+			case Menus.PROJECTS:
+				return "Projets";
 			default:
 				return null;
 		}
 	};
 
 	return (
-		<div>
-			<h2 className="text-lg font-semibold mb-2">
-				{menuSelected === "infos" ? "Informations" : "Couleurs"}
-			</h2>
-			<div className="space-y-4 mt-4">
-				{renderFormContent()}
-				<Button
-					onPress={handleSave}
-					color="secondary"
-					className="w-full text-white"
-					endContent={<Icon icon="mdi:content-save" width={20} color="white" />}
-				>
-					Enregistrer
-				</Button>
-			</div>
+		<div className="relative">
+			<h2 className="text-lg font-semibold mb-2">{renderTitle()}</h2>
+			<div className="space-y-4 mt-4">{renderFormContent()}</div>
 		</div>
 	);
 };

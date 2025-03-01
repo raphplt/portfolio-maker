@@ -12,8 +12,7 @@ export type BottomSideBarProps = {
 	goFullScreen: () => void;
 	exportTemplate: () => void;
 	setZoom: React.Dispatch<React.SetStateAction<number>>;
-	increaseZoom: () => void;
-	decreaseZoom: () => void;
+
 	zoom: number;
 };
 
@@ -21,10 +20,16 @@ const BottomSideBar = ({
 	goFullScreen,
 	exportTemplate,
 	setZoom,
-	increaseZoom,
-	decreaseZoom,
 	zoom,
 }: BottomSideBarProps) => {
+	const decreaseZoom = () => {
+		setZoom((prev: number) => Math.max(prev - 0.1, 0.5));
+	};
+
+	const increaseZoom = () => {
+		setZoom((prev: number) => Math.min(prev + 0.1, 2));
+	};
+
 	return (
 		<div className="flex items-center flex-col space-y-2">
 			<Divider />
