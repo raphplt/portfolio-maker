@@ -25,9 +25,9 @@ const Header = () => {
 				Penfolio
 			</Link>
 			<nav className="space-x-6 flex items-center">
-				<Link href="/" className="text-default-800 font-semibold">
+				{/* <Link href="/" className="text-default-800 font-semibold">
 					Accueil
-				</Link>
+				</Link> */}
 				{session && (
 					<Link
 						href="/protected/portfolios"

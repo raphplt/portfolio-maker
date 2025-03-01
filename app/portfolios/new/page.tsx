@@ -49,7 +49,9 @@ const New = () => {
 				throw new Error("Erreur lors de la sauvegarde du template");
 			}
 			const savedTemplate: TemplateData = await response.json();
-			router.push(`/portfolios/new/${savedTemplate.templateName}`);
+
+			console.log("Template sauvegardé:", savedTemplate);
+			router.push(`/portfolios/edit/${savedTemplate.id}`);
 		} catch (error) {
 			console.error("Erreur:", error);
 		}
