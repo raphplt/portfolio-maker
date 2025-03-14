@@ -1,7 +1,7 @@
 "use client";
-import CardPortfolio from "@/components/TemplatesList/CardPortfolio";
 import { useSessionContext } from "@/context/SessionProvider";
 import React from "react";
+import CardPortfolio from "./CardPortfolio";
 
 const Account = () => {
 	const { usersTemplates } = useSessionContext();
