@@ -3,7 +3,7 @@ import { Button, Divider } from "@heroui/react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React, { useState, useEffect } from "react";
 import SessionPopover from "../Shared/SessionPopover";
-import { useFormContext } from "@/contexts/FormContext";
+import { useFormContext } from "@/context/FormContext";
 
 const SectionList = () => {
 	const { menuSelected, setMenuSelected } = useFormContext();

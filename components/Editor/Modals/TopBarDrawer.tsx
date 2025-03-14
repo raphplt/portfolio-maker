@@ -1,4 +1,4 @@
-import { useSessionContext } from "@/contexts/SessionProvider";
+import { useSessionContext } from "@/context/SessionProvider";
 import {
 	Drawer,
 	DrawerContent,

@@ -2,10 +2,10 @@
 
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { FormProvider } from "@/contexts/FormContext";
-import { ZoomProvider } from "@/contexts/ZoomContext";
+import { FormProvider } from "@/context/FormContext";
+import { ZoomProvider } from "@/context/ZoomContext";
 import Main from "@/components/Editor/Main";
-import { useSessionContext } from "@/contexts/SessionProvider";
+import { useSessionContext } from "@/context/SessionProvider";
 import { ComponentProps } from "../../new/[id]/helper";
 
 const PortfolioEditor = () => {

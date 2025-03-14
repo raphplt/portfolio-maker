@@ -1,6 +1,6 @@
 import React from "react";
 import { Accordion, AccordionItem, Input, Textarea } from "@heroui/react";
-import { useFormContext } from "@/contexts/FormContext";
+import { useFormContext } from "@/context/FormContext";
 
 const InfosForm = () => {
 	const { handleChange, templateData } = useFormContext();

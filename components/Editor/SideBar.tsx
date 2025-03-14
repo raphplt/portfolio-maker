@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "./Form";
 import BottomSideBar from "./BottomSideBar";
-import { useZoom } from "@/contexts/ZoomContext";
+import { useZoom } from "@/context/ZoomContext";
 
 type SideBarProps = {
 	exportTemplate: () => void;

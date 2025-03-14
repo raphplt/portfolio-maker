@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import ZoomWrapper from "../Shared/ZoomWrapper";
 import SideBar from "./SideBar";
 import TopBar from "./TopBar";
-import { useFormContext } from "@/contexts/FormContext";
+import { useFormContext } from "@/context/FormContext";
 import exportToHTML from "@/utils/export";
 import { TemplateData } from "@/app/portfolios/new/[id]/helper";
-import { useSessionContext } from "@/contexts/SessionProvider";
+import { useSessionContext } from "@/context/SessionProvider";
 
 interface MainProps {
 	Component: React.ComponentType<TemplateData> | null;

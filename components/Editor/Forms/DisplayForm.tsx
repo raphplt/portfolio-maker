@@ -1,4 +1,4 @@
-import { useFormContext } from "@/contexts/FormContext";
+import { useFormContext } from "@/context/FormContext";
 import { Switch } from "@heroui/react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 

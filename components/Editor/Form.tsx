@@ -3,7 +3,7 @@ import ColorsForm from "./Forms/ColorsForm";
 import InfosForm from "./Forms/InfosForm";
 import DisplayForm from "./Forms/DisplayForm";
 import ProjectsForm from "./Forms/ProjectsForm";
-import { useFormContext } from "@/contexts/FormContext";
+import { useFormContext } from "@/context/FormContext";
 import { Menus } from "@/app/portfolios/new/[id]/helper";
 
 const Form = () => {

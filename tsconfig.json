@@ -22,7 +22,7 @@
 			"paths": {
 				"@/*": ["./*"],
 				"@components/*": ["components/*"],
-				"@contexts/*": ["contexts/*"],
+				"@contexts/*": ["context/*"],
 				"@types/*": ["types/*"],
 				"@utils/*": ["utils/*"],
 				"@hooks/*": ["hooks/*"]

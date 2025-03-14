@@ -5,7 +5,7 @@ import NextAuthProvider from "@/components/Sessions/NextAuthProvider";
 import Footer from "@/components/Layout/Footer";
 import { Analytics } from "@vercel/analytics/react";
 import Seo from "@/components/Shared/Seo";
-import { SessionProvider } from "@/contexts/SessionProvider";
+import { SessionProvider } from "@/context/SessionProvider";
 
 export const metadata: Metadata = {
 	title: "Penfolio",

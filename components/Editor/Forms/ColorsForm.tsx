@@ -1,6 +1,6 @@
 import React from "react";
 import { Input } from "@heroui/react";
-import { useFormContext } from "@/contexts/FormContext";
+import { useFormContext } from "@/context/FormContext";
 
 const ColorsForm = () => {
 	const { handleChange, templateData } = useFormContext();
