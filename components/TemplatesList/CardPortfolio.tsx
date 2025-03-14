@@ -8,11 +8,33 @@ import {
 	Button,
 	CardBody,
 } from "@heroui/react";
+import { addToast } from "@heroui/toast";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import axios from "axios";
 import Link from "next/link";
 import React from "react";
+import { toast } from "sonner";
+
+const port = process.env.NEXT_PUBLIC_API_URL || 3000;
 
 const CardPortfolio = ({ template }: { template: TemplateData }) => {
+
+
+	const handleDelete = () => {
+		console.log("delete");
+		try {
+
+			axios.delete(`${port}/users-templates/${template.id}`);
+			toast.success("Portfolio supprimé avec succès");
+		} catch (error) {
+			if (error instanceof Error) {
+				toast.error(error.message);
+			}
+
+		}
+		
+	};
+
 	return (
 		<button key={template.id}>
 			<Card key={template.id} isHoverable>
@@ -26,7 +48,7 @@ const CardPortfolio = ({ template }: { template: TemplateData }) => {
 							<Button
 								color="danger"
 								size="sm"
-								onPress={() => console.log("delete")}
+								onPress={handleDelete}
 								className="w-full"
 								startContent={<Icon icon="mdi:trash-can" width={20} />}
 							>

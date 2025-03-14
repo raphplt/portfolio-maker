@@ -15,17 +15,16 @@ import {
 } from "@/app/portfolios/new/[id]/helper";
 
 interface FormContextType {
-	templateData: TemplateData;
-	handleChange: (field: TemplateDataKey, value: string | boolean) => void;
-	handleSave: () => void;
-	setTemplateData: React.Dispatch<React.SetStateAction<TemplateData>>;
-	menuSelected: MenusType;
-	setMenuSelected: React.Dispatch<React.SetStateAction<MenusType>>;
-	isEditing: boolean;
-	setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-
+    templateData: TemplateData;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    handleChange: (field: TemplateDataKey, value: string | boolean | Array<any>) => void;
+    handleSave: () => void;
+    setTemplateData: React.Dispatch<React.SetStateAction<TemplateData>>;
+    menuSelected: MenusType;
+    setMenuSelected: React.Dispatch<React.SetStateAction<MenusType>>;
+    isEditing: boolean;
+    setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
 export const FormProvider = ({ children }: { children: ReactNode }) => {
@@ -35,7 +34,8 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 	const [isEditing, setIsEditing] = useState(false);
 
 	const handleChange = useCallback(
-		(field: TemplateDataKey, value: string | boolean) => {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		(field: TemplateDataKey, value: string | boolean | Array<any>) => {
 			setTemplateData((prev) => {
 				const keys = field.split(".");
 				const newData = { ...prev };
@@ -54,9 +54,6 @@ export const FormProvider = ({ children }: { children: ReactNode }) => {
 		},
 		[]
 	);
-
-
-
 	const handleSave = useCallback(() => {
 		console.log("Données sauvegardées :", templateData);
 	}, [templateData]);
