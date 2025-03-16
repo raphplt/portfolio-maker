@@ -1,9 +1,15 @@
 "use client";
-import { Popover, PopoverTrigger, PopoverContent, Button } from "@heroui/react";
+import {
+	Popover,
+	PopoverTrigger,
+	PopoverContent,
+	Button,
+	Link,
+} from "@heroui/react";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { CircleUser, GalleryHorizontalEnd } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 const SessionPopover = () => {
@@ -31,19 +37,19 @@ const SessionPopover = () => {
 		<div>
 			<Popover className="flex items-center space-x-2 " backdrop="blur">
 				<PopoverTrigger>
-					<Button color="primary" variant="ghost">
+					<Button color="secondary">
 						{session.user.image ? (
 							<Image
 								src={session.user.image}
 								alt="User Avatar"
 								className="w-6 h-6 rounded-full"
-								width={28}
-								height={28}
+								width={24}
+								height={24}
 							/>
 						) : (
-							<Icon icon="mdi:account-circle" width={28} />
+							<Icon icon="mdi:account-circle" width={24} />
 						)}
-						<span className="text-sm font-semibold">
+						<span className="font-semibold">
 							{session.user?.firstName || "Utilisateur"}
 						</span>
 					</Button>
@@ -54,11 +60,11 @@ const SessionPopover = () => {
 							src={session.user.image}
 							alt="User Avatar"
 							className="w-6 h-6 rounded-full"
-							width={28}
-							height={28}
+							width={40}
+							height={40}
 						/>
 					) : (
-						<Icon icon="mdi:account-circle" width={28} />
+						<Icon icon="mdi:account-circle" width={40} />
 					)}
 					<div className="flex flex-col items-center">
 						<span className="">
@@ -66,31 +72,26 @@ const SessionPopover = () => {
 						</span>
 						<p className="text-sm text-default-500">{session.user.email}</p>
 					</div>
-					<Button
-						as={Link}
+					<Link
 						href="/protected/account"
-						color="default"
-						variant="ghost"
-						className="w-full"
-						startContent={<Icon icon="mdi:account" width={18} />}
+						className="w-full flex justify-start gap-2 py-1 text-black"
 					>
+						<CircleUser size={20} />
 						Mon compte
-					</Button>
-					<Button
-						as={Link}
+					</Link>
+					<Link
 						href="/protected/portfolios"
-						color="default"
-						variant="ghost"
-						className="w-full"
-						startContent={<Icon icon="ic:baseline-web-stories" width={18} />}
+						className="w-full flex justify-start gap-2 py-1  text-black"
 					>
+						<GalleryHorizontalEnd size={20} />
 						Mes portfolios
-					</Button>
+					</Link>
 
 					<Button
 						onPress={() => signOut()}
 						color="danger"
-						size="sm"
+						variant="ghost"
+						className="w-full mt-2"
 						endContent={<Icon icon="mdi:logout" width={18} />}
 					>
 						Déconnexion

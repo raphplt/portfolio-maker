@@ -6,6 +6,7 @@ import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
+import HeroSection from "@/components/Home/HeroSection";
 
 const fadeIn = {
 	hidden: { opacity: 0, y: 50 },
@@ -25,66 +26,34 @@ const Home = () => {
 
 	return (
 		<>
-			<main className="bg-background text-foreground">
+			<main className="bg-white text-black">
 				{/* Hero Section */}
-				<section
-					className="min-h-screen flex flex-col items-center justify-center text-center px-8 relative bg-cover bg-center bg-no-repeat"
-					style={{ backgroundImage: "url('/Background.png')" }}
-				>
-					<motion.h1
-						initial="hidden"
-						animate="visible"
-						variants={fadeIn}
-						className="text-7xl font-extrabold text-navy"
-					>
-						Penfolio
-					</motion.h1>
-					<motion.h2
-						initial="hidden"
-						animate="visible"
-						variants={fadeIn}
-						className="text-3xl text-default-700 mt-4 max-w-2xl"
-					>
-						Créez un portfolio professionnel en quelques minutes, sans effort.
-					</motion.h2>
-					<motion.div initial="hidden" animate="visible" variants={fadeIn}>
-						{/* On affiche le bouton tant que l'animation n'est pas lancée */}
-						{!isAnimating && (
-							<Button
-								color="primary"
-								size="lg"
-								endContent={<Icon icon="akar-icons:arrow-right" />}
-								as="button"
-								onPress={handleClick}
-								className="mt-6 text-white"
-							>
-								Commencer
-							</Button>
-						)}
-					</motion.div>
-				</section>
+				<HeroSection />
 
-				{/* Autres sections... */}
 				<section className="min-h-screen grid md:grid-cols-3 gap-12 px-8 py-20 max-w-6xl mx-auto text-center">
+					<h2 className="text-5xl font-bold text-navy col-span-3">
+						Pourquoi choisir Portfolio Maker ?
+					</h2>
+
 					{[
 						{
 							title: "Automatisation",
 							description:
 								"Importez vos projets directement depuis Github, LinkedIn et Behance.",
-							color: "bg-teal",
+							color: "bg-asparagus",
 							icon: "ooui:robot",
 						},
 						{
 							title: "Design Moderne",
 							description:
 								"Des templates élégants et professionnels adaptés aux créatifs et développeurs.",
-							color: "bg-violet",
+							color: "bg-english-violet",
 							icon: "fluent:design-ideas-16-filled",
 						},
 						{
 							title: "Déploiement Simplifié",
 							description: "Hébergement intégré avec nom de domaine personnalisé.",
-							color: "bg-gold",
+							color: "bg-dark-cyan",
 							icon: "material-symbols:deployed-code-outline",
 						},
 					].map((item, index) => (
@@ -97,6 +66,7 @@ const Home = () => {
 							className={`${item.color} p-8 rounded-2xl shadow-xl text-white h-fit flex flex-col items-center gap-4`}
 						>
 							<Icon icon={item.icon} width={48} />
+							{item.color}
 							<h3 className="text-3xl font-bold">{item.title}</h3>
 							<p className="mt-4 text-lg">{item.description}</p>
 						</motion.div>
@@ -104,7 +74,7 @@ const Home = () => {
 				</section>
 
 				{/* Qui sommes-nous */}
-				<section className="min-h-screen flex flex-col items-center justify-center text-center px-8">
+				<section className="min-h-screen flex flex-col items-center justify-center text-center px-8 text-black">
 					<motion.h2
 						initial="hidden"
 						whileInView="visible"

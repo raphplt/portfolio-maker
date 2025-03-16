@@ -11,19 +11,17 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				white: "#FFFFFF",
-				black: "#000000",
-				cyan: "#1FACC8",
-				navy: "#252477",
-				teal: "#2B8091",
-				violet: "#433FD3",
-				blue: "#55ACBD",
-				indigo: "#7370D7",
-				gold: "#BF8733",
-				amber: "#EAAD53",
-				sand: "#EEBE76",
-				background: "#FFFFFF",
-				foreground: "#000000",
+				asparagus: "#6da34d", // Main green
+				"english-violet": "#56445d", // Dark purple
+				"dark-cyan": "#548687", // Teal-like color
+				"cambridge-blue": "#8fbc94", // Light green
+				"tea-green": "#c5e99b", // Very light green
+				"dark-asparagus": "#5a8a3e", // Darker green variant
+				"light-violet": "#6a5672", // Lighter violet variant
+				"light-cyan": "#679a9b", // Lighter cyan variant
+				"deep-violet": "#443651", // Deeper violet variant
+				"earthy-gold": "#a3915e", // Complementary earthy tone
+				"light-sand": "#c7b580", // Lighter earthy tone
 			},
 		},
 	},
@@ -34,11 +32,11 @@ export default {
 				light: {
 					colors: {
 						primary: {
-							DEFAULT: "#433FD3",
+							DEFAULT: "#6da34d", // Asparagus
 							foreground: "#FFFFFF",
 						},
 						secondary: {
-							DEFAULT: "#1FACC8",
+							DEFAULT: "#548687", // Dark cyan
 							foreground: "#FFFFFF",
 						},
 						background: "#FFFFFF",
@@ -47,8 +45,8 @@ export default {
 				},
 				dark: {
 					colors: {
-						primary: "#1FACC8",
-						secondary: "#7370D7",
+						primary: "#8fbc94", // Cambridge blue
+						secondary: "#56445d", // English violet
 						background: "#000000",
 						foreground: "#FFFFFF",
 					},
