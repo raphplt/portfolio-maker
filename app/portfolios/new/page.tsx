@@ -7,11 +7,13 @@ import React, { useEffect, useState } from "react";
 import { TemplateData, templateDefaultData } from "./[id]/helper";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { useSessionContext } from "@/context/SessionProvider";
 
 const New = () => {
 	const [templates, setTemplates] = useState<string[]>([]);
 	const router = useRouter();
 	const { data: session } = useSession();
+	const { refreshTemplates } = useSessionContext();
 
 	useEffect(() => {
 		fetch("/api/portfolios")
@@ -50,7 +52,8 @@ const New = () => {
 			}
 			const savedTemplate: TemplateData = await response.json();
 
-			console.log("Template sauvegardé:", savedTemplate);
+			await refreshTemplates();
+
 			router.push(`/portfolios/edit/${savedTemplate.id}`);
 		} catch (error) {
 			console.error("Erreur:", error);

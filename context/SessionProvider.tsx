@@ -12,66 +12,86 @@ import { api_url } from "@/utils/fetch";
 
 
 interface SessionContextProps {
-    user: {
-        email: string;
-        accessToken: string;
-    } | null;
-    loading: boolean;
-    signOut: () => void;
-    usersTemplates: TemplateData[];
-    setUsersTemplates: React.Dispatch<React.SetStateAction<TemplateData[]>>;
-    
+	user: {
+		email: string;
+		accessToken: string;
+	} | null;
+	loading: boolean;
+	signOut: () => void;
+	usersTemplates: TemplateData[];
+	setUsersTemplates: React.Dispatch<React.SetStateAction<TemplateData[]>>;
+	refreshTemplates: () => Promise<void>; // Ajoutez cette nouvelle fonction
 }
 
 const SessionContext = createContext<SessionContextProps | undefined>(
-    undefined
+	undefined
 );
 
 export const SessionProvider = ({ children }: { children: ReactNode }) => {
-    const { data: session, status } = useSession();
-    const [user, setUser] = useState<SessionContextProps["user"]>(null);
-    const loading = status === "loading";
-    const [usersTemplates, setUsersTemplates] = useState<TemplateData[]>([]);
-    
-    useEffect(() => {
-        if (session) {
-            setUser({
-                email: session.user?.email || "",
-                accessToken: session.accessToken || "",
-            });
-        }
-    }, [session]);
+	const { data: session, status } = useSession();
+	const [user, setUser] = useState<SessionContextProps["user"]>(null);
+	const loading = status === "loading";
+	const [usersTemplates, setUsersTemplates] = useState<TemplateData[]>([]);
 
-    useEffect(() => {
-        if (session?.user?.id) {
-            fetch(
-                api_url + "/users-templates/user/" + session.user.id)
-                .then((response) => response.json())
-                .then((data) => {
-                    if (Array.isArray(data)) {
-                        setUsersTemplates(data);
-                    } else {
-                        console.error("Expected an array but got:", data);
-                        setUsersTemplates([]);
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error fetching user templates:", error);
-                    setUsersTemplates([]);
-                });
-        }
-    }, [session]);
+	useEffect(() => {
+		if (session) {
+			setUser({
+				email: session.user?.email || "",
+				accessToken: session.accessToken || "",
+			});
+		}
+	}, [session]);
 
-    const handleSignOut = () => {
-        signOut();
-        setUser(null);
-    };
+	// Fonction pour récupérer les templates de l'utilisateur
+	const fetchUserTemplates = async () => {
+		if (session?.user?.id) {
+			try {
+				const response = await fetch(
+					api_url + "/users-templates/user/" + session.user.id
+				);
+				const data = await response.json();
 
-    return (
-        <SessionContext.Provider value={{ user, loading, signOut: handleSignOut, usersTemplates, setUsersTemplates }}>
-            {children}
-        </SessionContext.Provider>
-    );
+				if (Array.isArray(data)) {
+					setUsersTemplates(data);
+				} else {
+					console.error("Expected an array but got:", data);
+					setUsersTemplates([]);
+				}
+			} catch (error) {
+				console.error("Error fetching user templates:", error);
+				setUsersTemplates([]);
+			}
+		}
+	};
+
+	// Fonction pour rafraîchir les templates
+	const refreshTemplates = async () => {
+		await fetchUserTemplates();
+	};
+
+	useEffect(() => {
+		fetchUserTemplates();
+	}, [session]);
+
+	const handleSignOut = () => {
+		signOut();
+		setUser(null);
+	};
+
+	return (
+		<SessionContext.Provider
+			value={{
+				user,
+				loading,
+				signOut: handleSignOut,
+				usersTemplates,
+				setUsersTemplates,
+				refreshTemplates,
+			}}
+		>
+			{children}
+		</SessionContext.Provider>
+	);
 };
 
 export const useSessionContext = () => {
