@@ -20,7 +20,7 @@ interface SessionContextProps {
 	signOut: () => void;
 	usersTemplates: TemplateData[];
 	setUsersTemplates: React.Dispatch<React.SetStateAction<TemplateData[]>>;
-	refreshTemplates: () => Promise<void>; // Ajoutez cette nouvelle fonction
+	refreshTemplates: () => Promise<void>;
 }
 
 const SessionContext = createContext<SessionContextProps | undefined>(

@@ -50,7 +50,7 @@ const TopBarDrawer = ({
 							>
 								Retour
 							</Button>
-							{usersTemplates.length ?? "0"} templates
+							{templates.length ?? "0"} templates disponibles
 							{templates.map((template, index) => (
 								<Card
 									key={index}

@@ -102,18 +102,16 @@ const HeroSection = () => {
 				{/* CTA buttons */}
 				<motion.div variants={fadeIn} className="flex gap-4">
 					{/* Primary CTA button */}
-					{!isAnimating && (
-						<Button
-							color="primary"
-							size="lg"
-							endContent={<Icon icon="akar-icons:arrow-right" />}
-							as="button"
-							onPress={handleClick}
-							className="mt-6 text-white font-medium"
-						>
-							Commencer gratuitement
-						</Button>
-					)}
+					<Button
+						color="primary"
+						size="lg"
+						endContent={<Icon icon="akar-icons:arrow-right" />}
+						as="button"
+						onPress={handleClick}
+						className="mt-6 text-white font-medium"
+					>
+						Commencer gratuitement
+					</Button>
 
 					{/* Secondary CTA */}
 					<Button

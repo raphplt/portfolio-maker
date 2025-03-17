@@ -22,6 +22,12 @@ const New = () => {
 	}, []);
 
 	const onTemplateClick = async (template: string) => {
+
+		if (!session) {
+			router.push("/auth/signin");
+			return;
+		}
+
 		const defaultConfig = templateDefaultData; //TODO custom
 		if (!defaultConfig) {
 			console.error("Aucune configuration définie pour ce template");

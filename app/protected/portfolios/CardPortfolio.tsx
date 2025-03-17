@@ -8,38 +8,41 @@ import {
 	Button,
 	CardBody,
 } from "@heroui/react";
-import { addToast } from "@heroui/toast";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import axios from "axios";
+import { Pen } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { toast } from "sonner";
 
 const port = process.env.NEXT_PUBLIC_API_URL || 3000;
 
-const CardPortfolio = ({ template }: { template: TemplateData }) => {
-
-
-	const handleDelete = () => {
-		console.log("delete");
+const CardPortfolio = ({
+	template,
+	onDelete,
+}: {
+	template: TemplateData;
+	onDelete: () => void;
+}) => {
+	const handleDelete = async () => {
 		try {
-
-			axios.delete(`${port}/users-templates/${template.id}`);
+			await axios.delete(`${port}/users-templates/${template.id}`);
 			toast.success("Portfolio supprimé avec succès");
+			onDelete();
 		} catch (error) {
 			if (error instanceof Error) {
 				toast.error(error.message);
 			}
-
 		}
-		
 	};
 
 	return (
 		<button key={template.id}>
-			<Card key={template.id} isHoverable>
+			<Card key={template.id} isHoverable className="min-w-96">
 				<CardHeader className="flex flex-row justify-between items-center">
-					<h2 className="text-sm">{template.templateTitle}</h2>
+					<h2 className="font-semibold text-default-800 text-base">
+						{template.templateTitle}
+					</h2>
 					<Popover>
 						<PopoverTrigger>
 							<Icon icon="mdi:dots-vertical" width={20} />
@@ -61,10 +64,10 @@ const CardPortfolio = ({ template }: { template: TemplateData }) => {
 					<Button
 						as={Link}
 						href={`/portfolios/edit/${template.id}`}
-						color="secondary"
+						color="primary"
+						radius="sm"
 						className="w-fit"
-						size="sm"
-						endContent={<Icon icon="mdi:arrow-right" width={20} />}
+						endContent={<Pen width={18} />}
 					>
 						Editer
 					</Button>

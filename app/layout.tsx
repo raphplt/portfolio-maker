@@ -6,6 +6,7 @@ import Footer from "@/components/Layout/Footer";
 import { Analytics } from "@vercel/analytics/react";
 import Seo from "@/components/Shared/Seo";
 import { SessionProvider } from "@/context/SessionProvider";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
 	title: "Penfolio",
@@ -22,8 +23,10 @@ export default function RootLayout({
 			<SessionProvider>
 				<html lang="fr">
 					<Seo />
+
 					<body className={`antialiased mt-16`}>
 						<Header />
+						<Toaster />
 						{children}
 						<Footer />
 						<Analytics />

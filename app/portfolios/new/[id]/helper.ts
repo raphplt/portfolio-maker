@@ -91,8 +91,8 @@ export const templateDefaultData: TemplateData = {
 			"Je suis un développeur passionné par la création de solutions web innovantes.",
 		welcomeTitle: "Bienvenue sur mon Portfolio",
 		ctaButtonText: "Découvrir mes projets",
-		logo: "path/to/logo.png",
-		profilePicture: "https://i.pravatar.cc/500",
+		logo: "",
+		profilePicture: "/Illustrations/user.png",
 	},
 	sections: {
 		welcome: {
