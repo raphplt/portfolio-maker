@@ -13,6 +13,7 @@ export interface TemplateData {
 	id?: string;
 	templateName?: string;
 	templateTitle?: string;
+	deployedUrl?: string;
 	informations: {
 		name: string;
 		description: string;

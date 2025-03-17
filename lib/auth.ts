@@ -6,11 +6,14 @@ import { JWT } from "next-auth/jwt";
 import { Session } from "next-auth";
 import { UserInterface } from "@/type/user";
 
-export const authOptions : any  = {
+export const authOptions: any = {
 	providers: [
 		GitHubProvider({
 			clientId: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID || "",
 			clientSecret: process.env.NEXT_PUBLIC_GITHUB_CLIENT_SECRET || "",
+			authorization: {
+				params: { scope: "read:user user:email public_repo" },
+			},
 			profile(profile) {
 				return {
 					id: profile.id.toString(),

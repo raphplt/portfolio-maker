@@ -36,7 +36,7 @@ const Main: React.FC<MainProps> = ({ Component, id }) => {
 
 	return (
 		<main>
-			<TopBar />
+			<TopBar Component={Component} />
 			<div className="pt-20 flex flex-col md:flex-row bg-[#333333] min-h-screen overflow-hidden">
 				<div className="flex-1 p-6 md:mr-64">
 					<ZoomWrapper>

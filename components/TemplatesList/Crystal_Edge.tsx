@@ -237,7 +237,7 @@ const Portfolio = ({
 											key={skill}
 											className="p-4 rounded-lg backdrop-blur-sm relative overflow-hidden group"
 											style={{
-												backgroundColor: "rgba(255, 255, 255, 0.1)",
+												backgroundColor: "white",
 												border: `1px solid ${primaryColor}20`,
 											}}
 										>
@@ -257,7 +257,7 @@ const Portfolio = ({
 							<div
 								className="hidden md:block p-8 rounded-xl backdrop-blur-sm"
 								style={{
-									backgroundColor: "rgba(255, 255, 255, 0.05)",
+									backgroundColor: "white",
 									border: `1px solid ${primaryColor}20`,
 								}}
 							>

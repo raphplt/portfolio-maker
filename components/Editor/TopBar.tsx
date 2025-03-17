@@ -8,10 +8,18 @@ import { usePathname } from "next/navigation";
 import TopBarDrawer from "./Modals/TopBarDrawer";
 import SectionList from "./SectionList";
 import SaveTemplate from "./SaveTemplate";
+import DeployPortFolio from "./DeployPortFolio";
+import { TemplateData } from "@/app/portfolios/new/[id]/helper";
+import { useFormContext } from "@/context/FormContext";
 
-const TopBar = () => {
+const TopBar = ({
+	Component,
+}: {
+	Component: React.ComponentType<TemplateData> | null;
+}) => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const [templates, setTemplates] = useState<string[]>([]);
+	const { templateData } = useFormContext();
 
 	useEffect(() => {
 		fetch("/api/portfolios")
@@ -35,6 +43,7 @@ const TopBar = () => {
 							{/* <span className="font-bold text-black">Penfolio</span> */}
 						</Link>
 						<SaveTemplate currentTemplate={currentTemplate} />
+						<DeployPortFolio Component={Component} templateData={templateData} />
 					</div>
 					<SectionList />
 				</div>
