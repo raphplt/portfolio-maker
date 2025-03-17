@@ -6,19 +6,21 @@ import SessionPopover from "../Shared/SessionPopover";
 import { useFormContext } from "@/context/FormContext";
 
 const SectionList = () => {
-	const { menuSelected, setMenuSelected } = useFormContext();
-	const [isSmallPC, setIsSmallPC] = useState(window.innerWidth < 1280);
+    const { menuSelected, setMenuSelected } = useFormContext();
+				const [isSmallPC, setIsSmallPC] = useState(false); // Initial state à false
 
-	useEffect(() => {
-		const handleResize = () => {
-			setIsSmallPC(window.innerWidth < 1280);
-		};
+				useEffect(() => {
+					setIsSmallPC(window.innerWidth < 1280);
 
-		window.addEventListener("resize", handleResize);
-		return () => {
-			window.removeEventListener("resize", handleResize);
-		};
-	}, []);
+					const handleResize = () => {
+						setIsSmallPC(window.innerWidth < 1280);
+					};
+
+					window.addEventListener("resize", handleResize);
+					return () => {
+						window.removeEventListener("resize", handleResize);
+					};
+				}, []);
 
 	return (
 		<div className="flex items-center space-x-4">

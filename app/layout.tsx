@@ -22,7 +22,7 @@ export default function RootLayout({
 			<SessionProvider>
 				<html lang="fr">
 					<Seo />
-					<body className={`antialiased`}>
+					<body className={`antialiased mt-16`}>
 						<Header />
 						{children}
 						<Footer />

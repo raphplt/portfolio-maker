@@ -61,11 +61,11 @@ const New = () => {
 	};
 
 	return (
-		<main className="min-h-screen bg-gradient-to-r from-[#252477] to-[#2B8091] flex flex-col items-center p-8 space-y-8">
+		<main className="min-h-screen bg-gradient-to-r from-deep-violet to-dark-cyan flex flex-col items-center p-8 space-y-8">
 			<Button
 				as={Link}
 				href="/"
-				className="mt-4 flex items-center gap-2 bg-[#433FD3] text-white hover:bg-[#7370D7] px-4 py-2 rounded-md"
+				className="mt-4 flex items-center gap-2 bg-english-violet text-white hover:bg-light-violet px-4 py-2 rounded-md"
 			>
 				<Icon icon="bx:bx-arrow-back" width={24} />
 				Retour
@@ -75,16 +75,15 @@ const New = () => {
 				Étape 1 : Choisissez un template
 			</h1>
 
-			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full max-w-6xl bg-transparent">
+			<div className="gap-8 w-full max-w-6xl flex flex-wrap justify-center">
 				{templates.map((template, index) => (
 					<button key={index} onClick={() => onTemplateClick(template)}>
 						<Card
 							key={index}
 							isHoverable
-							// onPress={() => onTemplateClick(template)}
 							className="bg-transparent overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl cursor-pointer"
 						>
-							<CardHeader className="bg-[#BF8733] text-white p-3 text-center font-semibold">
+							<CardHeader className="bg-earthy-gold text-white p-3 text-center font-semibold">
 								{template}
 							</CardHeader>
 							<CardBody className="p-0">
