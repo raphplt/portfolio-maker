@@ -30,6 +30,17 @@ const ColorsForm = () => {
 				/>
 			</div>
 			<div className="space-y-2">
+				<label className="block font-semibold" htmlFor="secondaryColor">
+					Couleur tertiaire
+				</label>
+				<Input
+					id="tertiaryColor"
+					type="color"
+					value={templateData.theme.tertiaryColor}
+					onChange={(e) => handleChange("theme.tertiaryColor", e.target.value)}
+				/>
+			</div>
+			<div className="space-y-2">
 				<label className="block font-semibold" htmlFor="backgroundColor">
 					Couleur de fond
 				</label>

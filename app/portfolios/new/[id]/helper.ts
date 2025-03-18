@@ -131,13 +131,13 @@ export const templateDefaultData: TemplateData = {
 		github: "https://github.com",
 	},
 	theme: {
-		primaryColor: "#ff5733",
-		secondaryColor: "#33c4ff",
-		tertiaryColor: "#ff33a1",
-		backgroundColor: "#ffffff",
-		backgroundColorSecondary: "#f0f0f0",
-		textColor: "#000000",
-		textColorSecondary: "#333333",
+		primaryColor: "#2563eb", // Bleu royal professionnel
+		secondaryColor: "#64748b", // Gris bleuté neutre
+		tertiaryColor: "#0f172a", // Bleu très foncé presque noir
+		backgroundColor: "#ffffff", // Blanc pour la lisibilité
+		backgroundColorSecondary: "#f8fafc", // Gris très clair
+		textColor: "#0f172a", // Bleu très foncé pour le texte
+		textColorSecondary: "#475569", // Gris foncé pour le texte secondaire
 	},
 };
 

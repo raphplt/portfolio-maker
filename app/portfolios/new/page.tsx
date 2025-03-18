@@ -1,5 +1,13 @@
 "use client";
-import { Button, Card, CardBody, CardHeader } from "@heroui/react";
+import {
+	Button,
+	Card,
+	CardBody,
+	CardHeader,
+	Modal,
+	ModalHeader,
+	useDisclosure,
+} from "@heroui/react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,7 +21,8 @@ const New = () => {
 	const [templates, setTemplates] = useState<string[]>([]);
 	const router = useRouter();
 	const { data: session } = useSession();
-	const { refreshTemplates } = useSessionContext();
+	const { refreshTemplates, usersTemplates } = useSessionContext();
+	const { onOpen, onClose, isOpen } = useDisclosure();
 
 	useEffect(() => {
 		fetch("/api/portfolios")
@@ -22,9 +31,22 @@ const New = () => {
 	}, []);
 
 	const onTemplateClick = async (template: string) => {
+		console.log("usersTemplates:", usersTemplates);
+
+		for (const userTemplate of usersTemplates) {
+			if (userTemplate.templateName === template) {
+				alert("Vous avez déjà un portfolio de ce type");
+				return;
+			}
+		}
 
 		if (!session) {
 			router.push("/auth/signin");
+			return;
+		}
+
+		if (usersTemplates.length >= 3) {
+			alert("Vous avez atteint la limite de 3 portfolios");
 			return;
 		}
 
@@ -67,7 +89,7 @@ const New = () => {
 	};
 
 	return (
-		<main className="min-h-screen bg-gradient-to-r from-deep-violet to-dark-cyan flex flex-col items-center p-8 space-y-8">
+		<main className="min-h-screen bg-gradient-to-r from-deep-violet to-dark-cyan flex flex-col items-center p-8 space-y-8 ">
 			<Button
 				as={Link}
 				href="/"
@@ -81,7 +103,7 @@ const New = () => {
 				Étape 1 : Choisissez un template
 			</h1>
 
-			<div className="gap-8 w-full max-w-6xl flex flex-wrap justify-center">
+			<div className="gap-8 w-full max-w-7xl flex flex-wrap justify-center">
 				{templates.map((template, index) => (
 					<button key={index} onClick={() => onTemplateClick(template)}>
 						<Card
@@ -105,6 +127,24 @@ const New = () => {
 					</button>
 				))}
 			</div>
+
+			{/* Modale si maximum atteint */}
+			{/* <Modal isOpen={isOpen} onClose={onClose}>
+				<ModalHeader>
+					<h2 className="text-xl font-bold">Maximum atteint</h2>
+					<p className="text-default-700">
+						Vous avez atteint la limite de 3 portfolios
+					</p>
+				</ModalHeader>
+				<div className="flex justify-end gap-4">
+					<Button as={Link} href="/protected/portfolios" color="primary">
+						Voir mes portfolios
+					</Button>
+					<Button onPress={onClose} color="secondary">
+						Fermer
+					</Button>
+				</div>
+			</Modal> */}
 		</main>
 	);
 };

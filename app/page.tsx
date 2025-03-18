@@ -7,6 +7,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import HeroSection from "@/components/Home/HeroSection";
+import ChooseSection from "@/components/Home/ChooseSection";
 
 const fadeIn = {
 	hidden: { opacity: 0, y: 50 },
@@ -17,61 +18,14 @@ const Home = () => {
 	const [isAnimating, setIsAnimating] = useState(false);
 	const router = useRouter();
 
-	const handleClick = () => {
-		setIsAnimating(true);
-		setTimeout(() => {
-			router.push("/portfolios/new");
-		}, 600);
-	};
-
 	return (
 		<>
 			<main className="bg-white text-black">
 				{/* Hero Section */}
 				<HeroSection />
 
-				<section className="min-h-screen grid md:grid-cols-3 gap-12 px-8 py-20 max-w-6xl mx-auto text-center">
-					<h2 className="text-5xl font-bold text-navy col-span-3">
-						Pourquoi choisir Portfolio Maker ?
-					</h2>
-
-					{[
-						{
-							title: "Automatisation",
-							description:
-								"Importez vos projets directement depuis Github, LinkedIn et Behance.",
-							color: "bg-asparagus",
-							icon: "ooui:robot",
-						},
-						{
-							title: "Design Moderne",
-							description:
-								"Des templates élégants et professionnels adaptés aux créatifs et développeurs.",
-							color: "bg-english-violet",
-							icon: "fluent:design-ideas-16-filled",
-						},
-						{
-							title: "Déploiement Simplifié",
-							description: "Hébergement intégré avec nom de domaine personnalisé.",
-							color: "bg-dark-cyan",
-							icon: "material-symbols:deployed-code-outline",
-						},
-					].map((item, index) => (
-						<motion.div
-							key={index}
-							initial="hidden"
-							whileInView="visible"
-							viewport={{ once: true }}
-							variants={fadeIn}
-							className={`${item.color} p-8 rounded-2xl shadow-xl text-white h-fit flex flex-col items-center gap-4`}
-						>
-							<Icon icon={item.icon} width={48} />
-							{item.color}
-							<h3 className="text-3xl font-bold">{item.title}</h3>
-							<p className="mt-4 text-lg">{item.description}</p>
-						</motion.div>
-					))}
-				</section>
+				{/* Pourquoi nous choisir */}
+				<ChooseSection />
 
 				{/* Qui sommes-nous */}
 				<section className="min-h-screen flex flex-col items-center justify-center text-center px-8 text-black">

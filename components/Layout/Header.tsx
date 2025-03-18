@@ -22,6 +22,10 @@ const Header = () => {
 				Penfolio
 			</Link>
 			<nav className="space-x-6 flex items-center">
+				<Link as={Link} href="/" className="text-default-800 font-semibold">
+					Accueil
+				</Link>
+
 				<Link
 					as={Link}
 					href="/portfolios/new"
