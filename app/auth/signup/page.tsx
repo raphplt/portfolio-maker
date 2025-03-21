@@ -96,7 +96,7 @@ export default function SignUpPage() {
 					Vous avez déjà un compte ? Connectez-vous
 				</Link>
 
-				<div className=" space-y-2 w-1/3">
+				<div className="space-y-2">
 					<Divider className="my-4" />
 					<Button
 						onPress={() => signIn("github")}
@@ -105,13 +105,7 @@ export default function SignUpPage() {
 					>
 						S&apos;inscrire avec GitHub
 					</Button>
-					<Button
-						onPress={() => signIn("google")}
-						startContent={<Icon icon="flat-color-icons:google" width={20} />}
-						className="bg-white text-black border border-gray-300 w-full flex items-center justify-center py-2 px-4 rounded-lg"
-					>
-						S&apos;inscrire avec Google
-					</Button>
+				
 				</div>
 			</div>
 			<Image
