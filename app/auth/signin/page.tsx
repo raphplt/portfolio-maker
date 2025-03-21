@@ -93,7 +93,7 @@ function SignInContent() {
         <Link href="/auth/signup" className="text-default-500 mt-4">
           Vous n&apos;avez pas de compte ? Inscrivez-vous
         </Link>
-        <div className=" space-y-2 w-1/3">
+        <div className=" space-y-2">
           <Divider className="my-4" />
           <Button
             onPress={() => signIn("github")}
