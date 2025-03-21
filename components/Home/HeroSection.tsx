@@ -1,6 +1,6 @@
 import { Button, Link } from "@heroui/react";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -33,7 +33,7 @@ const HeroSection = () => {
 
 	return (
 		<section
-			className="min-h-screen flex flex-col items-center justify-center text-center px-8 relative bg-cover bg-center bg-no-repeat overflow-hidden"
+			className="pt-24 min-h-screen flex flex-col items-center justify-center text-center px-8 relative bg-cover bg-center bg-no-repeat overflow-hidden"
 			style={{ backgroundImage: "url('/Background.png')" }}
 		>
 			{/* Overlay gradient for better text readability */}
@@ -129,10 +129,10 @@ const HeroSection = () => {
 				{/* Preview image */}
 				<motion.div
 					variants={fadeIn}
-					className="mt-12 relative w-full max-w-4xl shadow-2xl rounded-lg overflow-hidden border border-default-200"
+					className="mt-12 relative w-full max-w-3xl shadow-2xl rounded-lg overflow-hidden border border-default-200"
 				>
 					<Image
-						src="/templates/BaseTemplate.png" // A modifier
+						src="/templates/Retro_Frame.png" // A modifier
 						alt="Aperçu d'un portfolio"
 						width={1200}
 						height={600}
@@ -152,6 +152,24 @@ const HeroSection = () => {
 			>
 				<Icon icon="mdi:chevron-down" className="text-3xl text-default-600" />
 			</motion.div>
+
+			<AnimatePresence>
+				{isAnimating && (
+					<motion.div
+						initial={{ scale: 1 }}
+						animate={{ scale: 50 }}
+						exit={{ scale: 50 }}
+						transition={{ duration: 0.6, ease: "easeOut" }}
+						className="fixed top-1/2 left-1/2 z-50 bg-primary rounded-full"
+						style={{
+							width: 60,
+							height: 60,
+							transform: "translate(-50%, -50%)",
+							transformOrigin: "center",
+						}}
+					/>
+				)}
+			</AnimatePresence>
 		</section>
 	);
 };

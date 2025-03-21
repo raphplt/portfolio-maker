@@ -1,11 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
 import { Button } from "@heroui/react";
-import { Icon } from "@iconify/react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { motion,  } from "framer-motion";
 import HeroSection from "@/components/Home/HeroSection";
 import ChooseSection from "@/components/Home/ChooseSection";
 
@@ -15,8 +12,6 @@ const fadeIn = {
 };
 
 const Home = () => {
-	const [isAnimating, setIsAnimating] = useState(false);
-	const router = useRouter();
 
 	return (
 		<>
@@ -88,25 +83,7 @@ const Home = () => {
 					</motion.div>
 				</section>
 			</main>
-
-			{/* Overlay animé au clic */}
-			<AnimatePresence>
-				{isAnimating && (
-					<motion.div
-						initial={{ scale: 1 }}
-						animate={{ scale: 50 }}
-						exit={{ scale: 50 }}
-						transition={{ duration: 0.6, ease: "easeOut" }}
-						className="fixed top-1/2 left-1/2 z-50 bg-primary rounded-full"
-						style={{
-							width: 60,
-							height: 60,
-							transform: "translate(-50%, -50%)",
-							transformOrigin: "center",
-						}}
-					/>
-				)}
-			</AnimatePresence>
+		
 		</>
 	);
 };

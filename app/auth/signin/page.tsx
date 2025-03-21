@@ -102,13 +102,13 @@ function SignInContent() {
           >
             Se connecter avec GitHub
           </Button>
-          <Button
+          {/* <Button
             onPress={() => signIn("google")}
             startContent={<Icon icon="flat-color-icons:google" width={20} />}
             className="bg-white text-black border border-gray-300 w-full flex items-center justify-center py-2 px-4 rounded-lg"
           >
             Se connecter avec Google
-          </Button>
+          </Button> */}
         </div>
       </div>
       <Image

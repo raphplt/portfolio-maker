@@ -24,7 +24,7 @@ export default function RootLayout({
 				<html lang="fr">
 					<Seo />
 
-					<body className={`antialiased pt-16`}>
+					<body className={`antialiased`}>
 						<Header />
 						<Toaster />
 						{children}

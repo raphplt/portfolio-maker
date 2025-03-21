@@ -89,17 +89,21 @@ const New = () => {
 	};
 
 	return (
-		<main className="min-h-screen bg-gradient-to-r from-deep-violet to-dark-cyan flex flex-col items-center p-8 space-y-8 ">
+		<main className="min-h-screen pt-28 bg-gradient-to-r from-deep-violet to-dark-cyan flex flex-col items-center p-8 space-y-8 ">
 			<Button
 				as={Link}
 				href="/"
-				className="mt-4 flex items-center gap-2 bg-english-violet text-white hover:bg-light-violet px-4 py-2 rounded-md"
+				color="primary"
+				variant="ghost"
+				size="sm"
+				radius="sm"
+				
 			>
 				<Icon icon="bx:bx-arrow-back" width={24} />
 				Retour
 			</Button>
 
-			<h1 className="pt-8 text-3xl font-bold text-white text-center">
+			<h1 className="pt-8 pb-4 text-3xl font-bold text-white text-center">
 				Étape 1 : Choisissez un template
 			</h1>
 
