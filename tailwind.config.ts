@@ -26,32 +26,32 @@ export default {
 		},
 	},
 	darkMode: "class",
-	plugins: [
-		heroui({
-			themes: {
-				light: {
-					colors: {
-						primary: {
-							DEFAULT: "#6da34d", // Asparagus
-							foreground: "#FFFFFF",
-						},
-						secondary: {
-							DEFAULT: "#548687", // Dark cyan
-							foreground: "#FFFFFF",
-						},
-						background: "#FFFFFF",
-						foreground: "#000000",
-					},
-				},
-				dark: {
-					colors: {
-						primary: "#8fbc94", // Cambridge blue
-						secondary: "#56445d", // English violet
-						background: "#000000",
-						foreground: "#FFFFFF",
-					},
-				},
-			},
-		}),
-	],
+	// plugins: [
+	// 	heroui({
+	// 		themes: {
+	// 			light: {
+	// 				colors: {
+	// 					primary: {
+	// 						DEFAULT: "#6da34d", // Asparagus
+	// 						foreground: "#FFFFFF",
+	// 					},
+	// 					secondary: {
+	// 						DEFAULT: "#548687", // Dark cyan
+	// 						foreground: "#FFFFFF",
+	// 					},
+	// 					background: "#FFFFFF",
+	// 					foreground: "#000000",
+	// 				},
+	// 			},
+	// 			dark: {
+	// 				colors: {
+	// 					primary: "#8fbc94", // Cambridge blue
+	// 					secondary: "#56445d", // English violet
+	// 					background: "#000000",
+	// 					foreground: "#FFFFFF",
+	// 				},
+	// 			},
+	// 		},
+	// 	}),
+	// ],
 } satisfies Config;
