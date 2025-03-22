@@ -6,4 +6,5 @@ export interface UserInterface {
 	githubUsername: string;
 	password?: string;
 	avatar?: string;
+	createdAt?: string;
 }

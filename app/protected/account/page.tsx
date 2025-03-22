@@ -62,9 +62,7 @@ const Account = () => {
               <h2 className="text-2xl font-semibold">
                 {session.user.firstName} {session.user.lastName}
               </h2>
-              <p className="text-small text-default-500">
-                {session.user.role.toLowerCase()}
-              </p>
+            
             </div>
           </div>
         </CardHeader>
@@ -91,7 +89,7 @@ const Account = () => {
 
             <div className="flex items-center gap-2">
               <Icon icon="mdi:calendar" className="text-default-500" width={20} />
-              <span>Membre depuis le {formatDate(session.user.createdAt)}</span>
+              <span>Membre depuis le {formatDate(session?.user?.createdAt ?? '')}</span>
             </div>
 
             <Divider />
