@@ -16,11 +16,10 @@ const SessionPopover = () => {
 	const { data: session, status } = useSession();
 
 	if (status === "loading") {
-		return <div>Loading...</div>;
+		return <Button color="primary">Chargement...</Button>;
 	}
 
 	if (!session) {
-		console.log("no session");
 		return (
 			<>
 				<Button as={Link} href="/auth/signup" color="primary" variant="ghost">
