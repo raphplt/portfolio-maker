@@ -3,10 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+/* * {
   scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Lato', sans-serif;
-}
+} */
