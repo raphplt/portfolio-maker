@@ -19,6 +19,7 @@ import { TemplateData, templateDefaultData } from "./[id]/helper";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useSessionContext } from "@/context/SessionProvider";
+import { ArrowRight } from "lucide-react";
 
 const New = () => {
     const [templates, setTemplates] = useState<string[]>([]);
@@ -114,7 +115,7 @@ const New = () => {
                         <Card
                             key={index}
                             isHoverable
-                            className="bg-transparent overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl cursor-pointer"
+                            className="bg-transparent w-96 overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl cursor-pointer"
                         >
                             <CardHeader className="bg-earthy-gold text-white p-3 text-center font-semibold">
                                 {template}
@@ -145,7 +146,10 @@ const New = () => {
                         </p>
                     </ModalBody>
                     <ModalFooter>
-                        <Button as={Link} href="/protected/portfolios" color="primary">
+                        <Button as={Link} href="/protected/portfolios" color="primary" 
+                        
+                        endContent={<ArrowRight size={20} />}
+                        >
                             Voir mes portfolios
                         </Button>
                         <Button onPress={onCloseMaxModal} color="secondary">
@@ -167,7 +171,9 @@ const New = () => {
                         </p>
                     </ModalBody>
                     <ModalFooter>
-                        <Button as={Link} href="/protected/portfolios" color="primary">
+                        <Button as={Link} href="/protected/portfolios" color="primary"
+                            endContent={<ArrowRight size={20} />}
+                        >
                             Voir mes portfolios
                         </Button>
                         <Button onPress={onCloseExistingModal} color="secondary">

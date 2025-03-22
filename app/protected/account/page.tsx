@@ -1,7 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
 import React from "react";
-import Image from "next/image";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import {
   Card,
@@ -10,15 +9,15 @@ import {
   Divider,
   Avatar,
   Link,
-  Button,
 } from "@heroui/react";
+import Actions from "@/components/Profile/Actions";
 
 const Account = () => {
-  const { data: session } = useSession();
+  const { data: session,  } = useSession();
 
   if (!session) {
     return (
-      <main className="p-8">
+      <main className="p-8 py-40 max-w-4xl mx-auto">
         <Card>
           <CardBody>
             <h1 className="text-2xl font-bold mb-4">Mon compte</h1>
@@ -38,7 +37,7 @@ const Account = () => {
   };
 
   return (
-    <main className="p-8 max-w-4xl mx-auto">
+    <main className="p-8 max-w-4xl mx-auto pt-24 pb-24">
       <h1 className="text-3xl font-bold mb-8">Mon compte</h1>
       
       <Card>
@@ -94,24 +93,8 @@ const Account = () => {
 
             <Divider />
 
-            <div className="flex flex-col gap-2">
-              <h3 className="text-lg font-semibold">Actions</h3>
-              <div className="flex gap-2">
-                <Button
-                  color="primary"
-                  startContent={<Icon icon="mdi:pencil" width={20} />}
-                >
-                  Modifier le profil
-                </Button>
-                <Button
-                  color="danger"
-                  variant="light"
-                  startContent={<Icon icon="mdi:delete" width={20} />}
-                >
-                  Supprimer le compte
-                </Button>
-              </div>
-            </div>
+            <Actions />
+           
           </div>
         </CardBody>
       </Card>

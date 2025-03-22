@@ -5,18 +5,20 @@ import {
 	PopoverContent,
 	Button,
 	Link,
+	Divider,
 } from "@heroui/react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { CircleUser, GalleryHorizontalEnd } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
+import UserAvatar from "./UserAvatar";
 
 const SessionPopover = () => {
 	const { data: session, status } = useSession();
 
 	if (status === "loading") {
-		return <Button color="primary">Chargement...</Button>;
+		return <Button color="secondary">Chargement...</Button>;
 	}
 
 	if (!session) {
@@ -37,34 +39,18 @@ const SessionPopover = () => {
 			<Popover className="flex items-center space-x-2 " backdrop="blur">
 				<PopoverTrigger>
 					<Button color="secondary">
-						{session.user.image ? (
-							<Image
-								src={session.user.image}
-								alt="User Avatar"
-								className="w-6 h-6 rounded-full"
-								width={24}
-								height={24}
-							/>
-						) : (
-							<Icon icon="mdi:account-circle" width={24} />
-						)}
-						<span className="font-semibold">
+
+						<UserAvatar width={28} height={28} />
+					
+						<p className="font-semibold">
 							{session.user?.firstName || "Utilisateur"}
-						</span>
+						</p>
 					</Button>
 				</PopoverTrigger>
 				<PopoverContent className="flex flex-col p-4 space-y-2">
-					{session.user.image ? (
-						<Image
-							src={session.user.image}
-							alt="User Avatar"
-							className="w-6 h-6 rounded-full"
-							width={40}
-							height={40}
-						/>
-					) : (
-						<Icon icon="mdi:account-circle" width={40} />
-					)}
+			
+						<UserAvatar width={40} height={40} />
+
 					<div className="flex flex-col items-center">
 						<span className="">
 							{session.user?.firstName} {session.user?.lastName}
@@ -86,11 +72,13 @@ const SessionPopover = () => {
 						Mes portfolios
 					</Link>
 
+					<Divider />
+
 					<Button
 						onPress={() => signOut()}
 						color="danger"
-						variant="ghost"
-						className="w-full mt-2"
+						// variant="ghost"
+						className="w-full mt-4"
 						endContent={<Icon icon="mdi:logout" width={18} />}
 					>
 						Déconnexion

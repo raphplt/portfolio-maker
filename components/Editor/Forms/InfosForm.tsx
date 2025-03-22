@@ -6,7 +6,7 @@ const InfosForm = () => {
 	const { handleChange, templateData } = useFormContext();
 
 	return (
-		<Accordion defaultExpandedKeys={["1"]} selectionMode="multiple">
+		<Accordion defaultExpandedKeys={["1", "2", "3"]} selectionMode="multiple">
 			<AccordionItem title="Informations générales" key={1}>
 				<div className="flex flex-col space-y-2 w-full">
 					<Input
