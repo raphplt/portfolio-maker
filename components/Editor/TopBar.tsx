@@ -40,7 +40,6 @@ const TopBar = ({
 						</Button>
 						<Link href="/" className="flex items-center space-x-4 cursor-pointer">
 							<Image src={"/Logo.png"} alt="Logo" width={32} height={32} />
-							{/* <span className="font-bold text-black">Penfolio</span> */}
 						</Link>
 						<SaveTemplate currentTemplate={currentTemplate} />
 						<DeployPortFolio Component={Component} templateData={templateData} />

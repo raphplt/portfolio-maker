@@ -18,11 +18,22 @@ const Header = () => {
 				className="font-bold text-lg text-black flex flex-row gap-x-4"
 				href="/"
 			>
-				<Image src={"/Logo.png"} alt="Logo" width={32} height={32} />
+				<Image
+					src={"/Logo.png"}
+					alt="Logo"
+					width={32}
+					height={32}
+					aria-label="Logo"
+				/>
 				Penfolio
 			</Link>
 			<nav className="space-x-6 flex items-center">
-				<Link as={Link} href="/" className="text-default-800 font-semibold">
+				<Link
+					as={Link}
+					href="/"
+					className="text-default-800 font-semibold"
+					aria-label="Accueil"
+				>
 					Accueil
 				</Link>
 
@@ -30,6 +41,7 @@ const Header = () => {
 					as={Link}
 					href="/portfolios/new"
 					className="text-default-800 font-semibold"
+					aria-label="Nouveau portfolio"
 				>
 					Nouveau portfolio
 				</Link>
@@ -39,6 +51,7 @@ const Header = () => {
 					href="/discover"
 					className="text-default-800 font-semibold"
 					isDisabled
+					aria-label="Découvrir"
 				>
 					Découvrir
 				</Link>

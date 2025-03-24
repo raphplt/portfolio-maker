@@ -1,10 +1,17 @@
-import { Button, Modal, ModalContent, useDisclosure } from "@heroui/react";
+import {
+	Button,
+	Chip,
+	Modal,
+	ModalContent,
+	useDisclosure,
+} from "@heroui/react";
 import React from "react";
 import { Octokit } from "@octokit/rest";
 import ReactDOMServer from "react-dom/server";
 import { TemplateData } from "@/app/portfolios/new/[id]/helper";
 import { useSessionContext } from "@/context/SessionProvider";
 import { api_url } from "@/utils/fetch";
+import { Earth } from "lucide-react";
 
 interface DeployPortFolioProps {
 	Component: React.ComponentType<TemplateData> | null;
@@ -49,7 +56,8 @@ const DeployPortFolio: React.FC<DeployPortFolioProps> = ({
 	const [deployedUrl, setDeployedUrl] = React.useState<string>("");
 
 	const deployPortfolio = async () => {
-		if (!user?.accessToken) {
+		console.log("user", user);
+		if (!user?.githubAccessToken) {
 			alert("Accès refusé. Veuillez vous connecter via GitHub.");
 			return;
 		}
@@ -62,7 +70,7 @@ const DeployPortFolio: React.FC<DeployPortFolioProps> = ({
 			const html = await exportToHTMLString(Component, templateData);
 			const htmlBase64 = btoa(unescape(encodeURIComponent(html)));
 
-			const octokit = new Octokit({ auth: user.accessToken });
+			const octokit = new Octokit({ auth: user.githubAccessToken });
 			const repoName = `portfolio-${Date.now()}`;
 
 			// Création du dépôt avec initialisation auto (README.md)
@@ -124,13 +132,17 @@ const DeployPortFolio: React.FC<DeployPortFolioProps> = ({
 	return (
 		<>
 			{!deployedUrl ? (
-				<Button size="sm" color="primary" onPress={deployPortfolio}>
+				<Button
+					color="primary"
+					onPress={deployPortfolio}
+					startContent={<Earth size={18} />}
+				>
 					Déployer Portfolio
 				</Button>
 			) : (
-				<Button size="sm" color="success" onPress={deployPortfolio}>
-					Redéployer Portfolio
-				</Button>
+				<Chip color="success" startContent={<Earth size={18} />}>
+					{deployedUrl}
+				</Chip>
 			)}
 
 			<Modal isOpen={isOpen} onOpenChange={onOpenChange}>

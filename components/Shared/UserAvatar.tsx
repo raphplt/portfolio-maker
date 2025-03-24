@@ -20,28 +20,24 @@ const UserAvatar = (
 
 
   return (
-    <>
-    {session.user.avatar ? (
-        <Avatar
-        radius="full"
-        size="lg"
-        src={session.user.avatar}
-        alt="Photo de profil"
-        style={{ width, height }}
-
-        />
-    ) : (
-        <Avatar
-        radius="full"
-        size="lg"
-        icon={<User 
-        
-        style={{ width, height }}
-        />}
-        />
-    )}
-    </>
-  )
+			<>
+				{session.user.avatar ? (
+					<Avatar
+						radius="full"
+						size="lg"
+						src={session.user.avatar}
+						alt="Photo de profil"
+						style={{ width, height }}
+					/>
+				) : (
+					<Avatar
+						radius="full"
+						size="sm"
+						icon={<User height={height - 10} width={width - 10} />}
+					/>
+				)}
+			</>
+		);
 }
 
 export default UserAvatar

@@ -15,6 +15,7 @@ interface SessionContextProps {
 	user: {
 		email: string;
 		accessToken: string;
+		githubAccessToken?: string;
 	} | null;
 	loading: boolean;
 	signOut: () => void;
@@ -38,6 +39,7 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
 			setUser({
 				email: session.user?.email || "",
 				accessToken: session.accessToken || "",
+				githubAccessToken: session.githubAccessToken || "",
 			});
 		}
 	}, [session]);
